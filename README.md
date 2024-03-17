@@ -15,6 +15,9 @@ This Angular-based mobile app allows users to capture photos with their device's
 ## Technologies Used
 - Angular
 - Node.js
+- Html
+- Bootstrap
+- CSS
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
