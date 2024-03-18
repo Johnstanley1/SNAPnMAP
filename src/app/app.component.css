@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure wrapper takes up at least the full height of the viewport */
+}
+
+.content {
+  flex-grow: 1; /* Make the content section grow to fill remaining space */
+}
+
+footer{
+  text-align: center;
+}
