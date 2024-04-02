@@ -15,11 +15,11 @@ This Angular-based mobile app allows users to capture photos with their device's
 
 
 ## Menu/Navigation
-*Because it's a mobile app, we should set the navbar to the footer, and make it present on every page (similar to social media navbars at the bottom)* /
--> Photos (Plus icon top right of page to add photo)  /
--> Collections (Plus icon top right of page to add collection) /
--> Camera (Take photos, add photo info) /
--> Hidden Photos: Password locked  /
+*Because it's a mobile app, we should set the navbar to the footer, and make it present on every page (similar to social media navbars at the bottom)* \
+-> Photos (Plus icon top right of page to add photo)  \
+-> Collections (Plus icon top right of page to add collection) \
+-> Camera (Take photos, add photo info) \
+-> Hidden Photos: Password locked  \
 
 ## Technologies Used
 - Angular
@@ -29,26 +29,26 @@ This Angular-based mobile app allows users to capture photos with their device's
 - CSS
 
 # Database Schema:
-Photos: { /
-    Name: String / 
-    Photo: Image /
-	Date Captured: DateTime /
-	Date Added: DateTime / 
-    Tags: Tags[] /
-	Favourite: bool / 
-	Hidden: bool / 
-} / 
+Photos: { \
+    Name: String \
+    Photo: Image \
+	Date Captured: DateTime \
+	Date Added: DateTime \ 
+    Tags: Tags[] \
+	Favourite: bool \
+	Hidden: bool \
+} 
 
-Collection: {  /
-    Name: String /
-	Photos: Image[] /
-	Date Created: DateTime /
-	Description: String /
+Collection: {  \
+    Name: String \
+	Photos: Image[] \
+	Date Created: DateTime \
+	Description: String \
 }
 
-Tags{ /
-    Id: int /
-    Name: string /
+Tags{ \
+    Id: int \
+    Name: string \
 }
 
 ## Development server
