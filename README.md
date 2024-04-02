@@ -19,7 +19,7 @@ This Angular-based mobile app allows users to capture photos with their device's
 -> Photos (Plus icon top right of page to add photo)  \
 -> Collections (Plus icon top right of page to add collection) \
 -> Camera (Take photos, add photo info) \
--> Hidden Photos: Password locked  \
+-> Hidden Photos: Password locked
 
 ## Technologies Used
 - Angular
@@ -33,7 +33,7 @@ Photos: { \
     Name: String \
     Photo: Image \
 	Date Captured: DateTime \
-	Date Added: DateTime \ 
+	Date Added: DateTime \
     Tags: Tags[] \
 	Favourite: bool \
 	Hidden: bool \
