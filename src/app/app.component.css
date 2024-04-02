@@ -1,13 +1,31 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.navbar-toggler {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure wrapper takes up at least the full height of the viewport */
+  padding-top: 50px;
+  z-index: 1;
 }
 
 .content {
-  flex-grow: 1; /* Make the content section grow to fill remaining space */
+  padding-bottom: 50px;
+  z-index: 1;
 }
 
-footer{
-  text-align: center;
-}
