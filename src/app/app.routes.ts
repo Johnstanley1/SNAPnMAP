@@ -10,9 +10,11 @@ import {SettingpageComponent} from "./settingpage/settingpage.component";
 import {CollectionspageComponent} from "./collectionspage/collectionspage.component";
 import {CamerapageComponent} from "./camerapage/camerapage.component";
 import {HiddenpageComponent} from "./hiddenpage/hiddenpage.component";
+import {PhotopageComponent} from "./photopage/photopage.component";
 
 export const routes: Routes = [
   {path: "home", component: HomepageComponent},
+  {path: "photo", component: PhotopageComponent},
   {path: "setting", component: SettingpageComponent},
   {path: "collections", component: CollectionspageComponent},
   {path: "camera", component: CamerapageComponent},
