@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
-  selector: 'app-aboutpage',
+  selector: 'app-settingpage',
   standalone: true,
     imports: [
         NgOptimizedImage
     ],
-  templateUrl: './aboutpage.component.html',
-  styleUrl: './aboutpage.component.css'
+  templateUrl: './settingpage.component.html',
+  styleUrl: './settingpage.component.css'
 })
-export class AboutpageComponent {
+export class SettingpageComponent {
 
 }

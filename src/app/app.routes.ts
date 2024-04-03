@@ -6,9 +6,15 @@
 
 import { Routes } from '@angular/router';
 import {HomepageComponent} from "./homepage/homepage.component";
-import {AboutpageComponent} from "./aboutpage/aboutpage.component";
+import {SettingpageComponent} from "./settingpage/settingpage.component";
+import {CollectionspageComponent} from "./collectionspage/collectionspage.component";
+import {CamerapageComponent} from "./camerapage/camerapage.component";
+import {HiddenpageComponent} from "./hiddenpage/hiddenpage.component";
 
 export const routes: Routes = [
   {path: "home", component: HomepageComponent},
-  {path: "about", component: AboutpageComponent},
+  {path: "setting", component: SettingpageComponent},
+  {path: "collections", component: CollectionspageComponent},
+  {path: "camera", component: CamerapageComponent},
+  {path: "hidden", component: HiddenpageComponent}
 ];

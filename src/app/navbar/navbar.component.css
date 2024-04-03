@@ -1,1 +1,7 @@
-
+.white-background{
+  background-color: white;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
