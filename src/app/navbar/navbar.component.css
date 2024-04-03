@@ -1,7 +1,27 @@
 .white-background{
   background-color: white;
-  height: 60px;
+  height: 80px;
   display: flex;
   align-items: center;
   padding: 10px;
+}
+
+.active{
+  background-color: #4ab4ff;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.icon{
+  width: 48px;
+  height: auto;
+}
+
+.nav-item{
+  display: inline-block;
+}
+
+.nav-link img{
+  padding: 3px;
+  max-width: 100%;
 }

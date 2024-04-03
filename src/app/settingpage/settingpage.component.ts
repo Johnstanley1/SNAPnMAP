@@ -10,6 +10,7 @@ import {NgOptimizedImage} from "@angular/common";
   templateUrl: './settingpage.component.html',
   styleUrl: './settingpage.component.css'
 })
+
 export class SettingpageComponent {
 
 }
