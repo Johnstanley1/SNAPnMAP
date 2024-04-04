@@ -12,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
 import {HomepageComponent} from "./homepage/homepage.component";
-import {Global} from "../../services/global-service";
+import {GlobalService} from "../../services/global-service";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,7 @@ import {Global} from "../../services/global-service";
 })
 export class AppComponent implements OnInit {
   title: string = "Snap&Map";
-  globalService = new Global();
+  globalService = new GlobalService();
   constructor() {}
 
   ngOnInit(): void {

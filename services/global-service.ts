@@ -1,7 +1,11 @@
-import {Facade} from "./facade-service";
+import {FacadeService} from "./facade-service";
+import { Injectable } from '@angular/core';
 
-export class Global{
-  facadeService = new Facade();
+@Injectable({
+  providedIn: 'root'
+})
+export class GlobalService{
+  facadeService = new FacadeService();
   initDB(){
     this.facadeService.initDatabase()
   }

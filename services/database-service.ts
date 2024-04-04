@@ -4,6 +4,11 @@
 // Student ID: 8864315,
 //             88*****
 import {Photo} from "./model-service";
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class DatabaseService {
   db: any

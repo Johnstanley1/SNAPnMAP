@@ -1,5 +1,11 @@
 import {DatabaseService} from "./database-service";
-export class Facade{
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class FacadeService{
     dbService = new DatabaseService()
     initDatabase() {
       this.dbService.createDatabase().then(()=>{

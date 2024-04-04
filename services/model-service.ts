@@ -1,3 +1,13 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ModelService{
+  constructor() {
+  }
+}
+
 export class Photo{
   name: string;
   photo: Photo;
