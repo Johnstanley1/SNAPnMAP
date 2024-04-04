@@ -11,6 +11,8 @@ import {CollectionspageComponent} from "./collectionspage/collectionspage.compon
 import {CamerapageComponent} from "./camerapage/camerapage.component";
 import {HiddenpageComponent} from "./hiddenpage/hiddenpage.component";
 import {PhotopageComponent} from "./photopage/photopage.component";
+import {AuthorspageComponent} from "./authorspage/authorspage.component";
+import {AddcollectionspageComponent} from "./addcollectionspage/addcollectionspage.component";
 
 export const routes: Routes = [
   {path: "home", component: HomepageComponent},
@@ -18,5 +20,7 @@ export const routes: Routes = [
   {path: "setting", component: SettingpageComponent},
   {path: "collections", component: CollectionspageComponent},
   {path: "camera", component: CamerapageComponent},
-  {path: "hidden", component: HiddenpageComponent}
+  {path: "hidden", component: HiddenpageComponent},
+  {path: "authors", component: AuthorspageComponent},
+  {path: "addCollections", component: AddcollectionspageComponent}
 ];

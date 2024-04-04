@@ -6,12 +6,13 @@ Student ID: 8864315,
             88*****
 */
 
-import { Component } from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
 import {HomepageComponent} from "./homepage/homepage.component";
+import {Global} from "../../services/global-service";
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,12 @@ import {HomepageComponent} from "./homepage/homepage.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title: string = "Snap&Map"
+export class AppComponent implements OnInit {
+  title: string = "Snap&Map";
+  globalService = new Global();
+  constructor() {}
+
+  ngOnInit(): void {
+    this.globalService.initDB();
+  }
 }
