@@ -1,0 +1,15 @@
+/* CSS Details:
+  - display in grid format
+  - grid-template repeats the columns for dynamic generation
+  - gap places a gap in   between each card:
+ */
+.card-group{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+#sortBtn{
+  padding-left: 15px;
+  margin-left: 15px;
+}
