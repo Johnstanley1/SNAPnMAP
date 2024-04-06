@@ -10,16 +10,16 @@ export class ModelService{
 
 export class Photo{
   name: string;
-  photo: Photo;
-  dateCaptured: Date = new Date();
-  dateAdded: Date = new Date();
+  photo: Photo[];
+  dateCaptured: Date;
+  dateAdded: Date;
   tags: string[];
   favourite: boolean;
   hidden: boolean;
   tagId: number
 
-  constructor(name: string, photo: Photo, dateCaptured: Date, dateAdded: Date,
-        tags: string[], favourite: boolean, hidden: boolean, tagId: number ) {
+  constructor(name: string, photo: Photo[], dateCaptured: Date, dateAdded: Date,tags: string[],
+              favourite: boolean, hidden: boolean, tagId: number ) {
     this.name = name
     this.photo = photo
     this.dateCaptured = dateCaptured
@@ -45,10 +45,10 @@ export class Tag{
 export class Collection{
   name: string
   thumbnailPhotos: Photo[]
-  dateCreated: Date = new Date()
+  dateCreated: string
   description: string
 
-  constructor(name: string, thumbnailPhotos: Photo[], dateCreated: Date, description: string) {
+  constructor(name: string, thumbnailPhotos: Photo[], dateCreated: string, description: string) {
     this.name = name
     this.thumbnailPhotos = thumbnailPhotos
     this.dateCreated = dateCreated

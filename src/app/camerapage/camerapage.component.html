@@ -1,1 +1,57 @@
-<p>camerapage works!</p>
+<!--
+Programming Mobile Apps
+Authors: Johnstanley Ajagu,
+         Will Smith
+Student ID: 8864315,
+            88*****
+-->
+
+<div class="m-4">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2>Add Photo</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="text-center m-3">
+        <img [src]="imgsrc" width="80%" alt="Image placeholder">
+      </div>
+      <form #photoForm="ngForm">
+        <div class="mb-3">
+          <label for="photoName">Photo Name</label>
+          <input id="photoName" type="text" class="form-control" name="photoName">
+        </div>
+        <div class="mb-3">
+          <label for="dateCaptured">Date Captured</label>
+          <input id="dateCaptured" class="form-control" name="dateCaptured" [value]="currentDate" [readonly]="true">
+        </div>
+        <div class="mb-3">
+          <label for="dateAdded">Date Added</label>
+          <input id="dateAdded" type="date" class="form-control" name="dateAdded">
+        </div>
+        <div class="mb-3">
+          <label for="photoTag">Tag</label>
+          <input id="photoTag" class="form-control" name="photoTag">
+        </div>
+        <div class="mb-3">
+          <div class="form-check form-switch form-check-reverse">
+            <input class="form-check-input" type="checkbox" id="favouritePhoto">
+            <label class="form-check-label" for="favouritePhoto">Favourite</label>
+          </div>
+          <div class="form-check form-switch form-check-reverse">
+            <input class="form-check-input" type="checkbox" id="hidePhoto">
+            <label class="form-check-label" for="hidePhoto">Hide Photo</label>
+          </div>
+        </div>
+        <div class="text-center m-3 col-6 mx-auto">
+          <button class="btn btn-outline-primary container-fluid" (click)="$event">Capture photo</button>
+        </div>
+        <div class="card-footer">
+          Form values: {{photoForm.value | json}}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

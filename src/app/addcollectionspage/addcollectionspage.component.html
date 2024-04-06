@@ -1,7 +1,14 @@
+<!--
+Programming Mobile Apps
+Authors: Johnstanley Ajagu,
+         Will Smith
+Student ID: 8864315,
+            88*****
+-->
 <div class="m-4">
   <div class="card">
     <div class="card-header text-center">
-      <h2>Add a Collection</h2>
+      <h2>Add Collection</h2>
     </div>
     <div class="card-body">
       <form #collectionForm="ngForm">
@@ -28,7 +35,9 @@
           <textarea id="description" class="form-control" name="description"></textarea>
         </div>
 
-        <button type="button" id="btnAdd" class="btn btn-primary">Add</button>
+        <div class="text-center m-3 col-6 mx-auto">
+          <button class="btn btn-outline-primary container-fluid" (click)="$event">Add</button>
+        </div>
       </form>
     </div>
     <div class="card-footer">

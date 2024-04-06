@@ -15,6 +15,6 @@ import {JsonPipe} from "@angular/common";
 })
 export class AddcollectionspageComponent {
   collection = new Collection("Collection1", [],
-    new Date(2020,5,15), "Test Collection")
+    "", "Test Collection")
 
 }

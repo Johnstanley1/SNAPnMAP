@@ -1,0 +1,46 @@
+<!--
+Programming Mobile Apps
+Authors: Johnstanley Ajagu,
+         Will Smith
+Student ID: 8864315,
+            88*****
+-->
+<div class="m-4">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2>Modify Collection</h2>
+    </div>
+    <div class="card-body">
+      <form #collectionModifyForm="ngForm">
+        <div class="mb-3">
+          <label for="nameModify">Collection Name</label>
+          <input id="nameModify" type="text" class="form-control" name="nameModify"
+                 [(ngModel)]="collection.name" #name="ngModel"
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="thumbnailsModify">Collection Thumbnail</label>
+          <input id="thumbnailsModify" type="number" class="form-control" name="thumbnailsModify">
+        </div>
+        <div class="mb-3">
+          <label for="dateModify">Collection Date</label>
+          <input id="dateModify" type="date" class="form-control" name="dateModify">
+        </div>
+        <div class="mb-3">
+          <label for="descriptionModify">Description</label>
+          <textarea id="descriptionModify" class="form-control" name="descriptionModify"></textarea>
+        </div>
+
+        <div class="text-center m-3 col-6 mx-auto">
+          <button class="btn btn-outline-primary container-fluid" (click)="$event">Update</button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      Form values: {{collectionModifyForm.value | json}}
+    </div>
+  </div>
+</div>
+
+
