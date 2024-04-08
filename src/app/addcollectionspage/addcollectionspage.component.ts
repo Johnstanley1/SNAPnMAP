@@ -14,7 +14,7 @@ import {JsonPipe} from "@angular/common";
   styleUrl: './addcollectionspage.component.css'
 })
 export class AddcollectionspageComponent {
-  collection = new Collection("Collection1", [],
-    "", "Test Collection")
+  collection = new Collection("", [],
+    "", "")
 
 }

@@ -12,26 +12,52 @@ Student ID: 8864315,
       <h2>Add Photo</h2>
     </div>
     <div class="card-body">
-
       <div class="text-center m-3">
         <img [src]="imgsrc" width="80%" alt="Image placeholder">
       </div>
-      <form #photoForm="ngForm">
+      <form [formGroup]="photoForm">
         <div class="mb-3">
           <label for="photoName">Photo Name</label>
-          <input id="photoName" type="text" class="form-control" name="photoName">
+          <input id="photoName" type="text" class="form-control" formControlName="_photoName">
+
+          @if (refName.invalid && (refName.touched || refName.dirty)){
+            @if(refName.errors?.['required']){
+              <small class="text-danger">Name is required</small><br>
+            }
+            @if(refName.errors?.['minlength']){
+              <small class="text-danger">Name must be at least {{Min_Length}} char long</small><br>
+            }
+            @if(refName.errors?.['maxlength']){
+              <small class="text-danger">Name must be at most {{Max_length}} char long</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="dateCaptured">Date Captured</label>
-          <input id="dateCaptured" class="form-control" name="dateCaptured" [value]="currentDate" [readonly]="true">
+          <input id="dateCaptured" class="form-control" formControlName="dateCaptured" [value]="currentDate" [readonly]="true">
         </div>
         <div class="mb-3">
           <label for="dateAdded">Date Added</label>
-          <input id="dateAdded" type="date" class="form-control" name="dateAdded">
+          <input id="dateAdded" type="date" class="form-control" formControlName="_dateAdded">
+
+          @if (refDateAdded.invalid && (refDateAdded.touched || refDateAdded.dirty)){
+            @if(refDateAdded.errors?.['required']){
+              <small class="text-danger">Added date is required</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="photoTag">Tag</label>
-          <input id="photoTag" class="form-control" name="photoTag">
+          <input id="photoTag" class="form-control" formControlName="_photoTag">
+
+          @if (refTag.invalid && (refTag.touched || refTag.dirty)){
+            @if(refTag.errors?.['required']){
+              <small class="text-danger">Tag is required</small><br>
+            }
+          }
+          <div id="photoTags"></div>
         </div>
         <div class="mb-3">
           <div class="form-check form-switch form-check-reverse">
@@ -43,8 +69,9 @@ Student ID: 8864315,
             <label class="form-check-label" for="hidePhoto">Hide Photo</label>
           </div>
         </div>
-        <div class="text-center m-3 col-6 mx-auto">
-          <button class="btn btn-outline-primary container-fluid" (click)="$event">Capture photo</button>
+        <div class="text-center d-grid gap-2 m-3 col-6 mx-auto">
+          <button class="btn btn-outline-info container-fluid" (click)="$event">Capture photo</button>
+          <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnAdd_click()">Save</button>
         </div>
         <div class="card-footer">
           Form values: {{photoForm.value | json}}

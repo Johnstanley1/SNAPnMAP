@@ -14,6 +14,6 @@ import {Collection} from "../../../services/model-service";
   styleUrl: './modifycollectionspage.component.css'
 })
 export class ModifycollectionspageComponent {
-  collection = new Collection("Collection1", [],
-    "", "Test Collection")
+  collection = new Collection("", [],
+    "", "")
 }
