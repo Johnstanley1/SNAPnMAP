@@ -9,8 +9,9 @@ export class ModelService{
 }
 
 export class Photo{
+  id: number| undefined;
   name: string;
-  photo: Photo[];
+  imageDataUrl: string; // Save images as their DataURL
   dateCaptured: Date;
   dateAdded: Date;
   tags: string[];
@@ -18,10 +19,10 @@ export class Photo{
   hidden: boolean;
   tagId: number
 
-  constructor(name: string, photo: Photo[], dateCaptured: Date, dateAdded: Date,tags: string[],
+  constructor(name: string, dataUrl: string, dateCaptured: Date, dateAdded: Date,tags: string[],
               favourite: boolean, hidden: boolean, tagId: number ) {
     this.name = name
-    this.photo = photo
+    this.imageDataUrl = dataUrl
     this.dateCaptured = dateCaptured
     this.dateAdded = dateAdded
     this.tags = tags
@@ -43,14 +44,17 @@ export class Tag{
 }
 
 export class Collection{
+  id: number|undefined
   name: string
-  thumbnailPhotos: Photo[]
+  thumbnailPhoto: string // save thumbnail photo as DataURL
+  photos: Photo[]
   dateCreated: string
   description: string
 
-  constructor(name: string, thumbnailPhotos: Photo[], dateCreated: string, description: string) {
+  constructor(name: string, thumbnailPhoto: string, photos: Photo[], dateCreated: string, description: string) {
     this.name = name
-    this.thumbnailPhotos = thumbnailPhotos
+    this.thumbnailPhoto = thumbnailPhoto
+    this.photos = photos
     this.dateCreated = dateCreated
     this.description = description
   }

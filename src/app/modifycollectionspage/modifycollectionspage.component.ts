@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
-import {Collection} from "../../../services/model-service";
+import {Collection, Photo} from "../../../services/model-service";
 
 @Component({
   selector: 'app-modifycollectionspage',
@@ -14,6 +14,5 @@ import {Collection} from "../../../services/model-service";
   styleUrl: './modifycollectionspage.component.css'
 })
 export class ModifycollectionspageComponent {
-  collection = new Collection("", [],
-    "", "")
+  collection = new Collection("", "", [], "", "")
 }

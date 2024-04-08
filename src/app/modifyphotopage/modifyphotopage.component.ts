@@ -17,6 +17,6 @@ export class ModifyphotopageComponent {
   imgsrc: any
   currentDate: string = new Date().toLocaleDateString("en-CA")
 
-  photo = new Photo("", [], new Date(), new Date(), [], true, false, 2)
+  photo = new Photo("", "", new Date(), new Date(), [], true, false, 2)
 
 }
