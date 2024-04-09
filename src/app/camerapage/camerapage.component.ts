@@ -3,6 +3,7 @@ import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angula
 import {JsonPipe, NgForOf} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
+import {CameraComponent} from "../camera/camera.component";
 
 @Component({
   selector: 'app-camerapage',
@@ -11,7 +12,8 @@ import {DALService} from "../../../services/DAL-service";
     FormsModule,
     JsonPipe,
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    CameraComponent
   ],
   templateUrl: './camerapage.component.html',
   styleUrl: './camerapage.component.css'
