@@ -25,7 +25,7 @@ export class PhotopageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      // this.loadPhotos()
+    this.loadPhotos()
   }
 
   changeSortValue_click() {
@@ -43,29 +43,38 @@ export class PhotopageComponent implements OnInit{
 
   }
 
-  // loadPhotos() {
-  //   this.loadPhoto.selectAllPhotos().then((data) => {
-  //     let htmlCode = ""
-  //
-  //     if (data.length === 0) {
-  //       htmlCode += `<p>No record found</p>`
-  //     } else {
-  //       for (let i = 0; i < data.length; i++) {
-  //         const card = data [i]
-  //
-  //         htmlCode += `<div class="card">
-  //                      <a [routerLink]="['/modifyPhoto', ${card.id}]">
-  //                        <img src="${card.imageDataUrl}" class="card-img-top" alt="Photo">
-  //                      </a>
-  //                    </div>`;
-  //       }
-  //     }
-  //
-  //     // @ts-ignore
-  //     document.getElementById("photoContainer").innerHTML = htmlCode;
-  //
-  //   }).catch((e) => {
-  //     console.log(e.message)
-  //   })
-  // }
+  loadPhotos() {
+    console.log("LOAD PHOTOS CALLED");
+    this.loadPhoto.selectAllPhotos().then((data) => {
+
+      // Get card group:
+      const cardGroup = document.getElementById('card-group');
+
+      let htmlCode = ""
+
+      if (data.length === 0) {
+        htmlCode += `<p>No Photos Inside Storage 😭</p>`
+      } else {
+        for (let i = 0; i < data.length; i++) {
+          const card = data [i]
+
+          // Create new image and assign it the saved dataUrl:
+          const img = new Image();
+          img.src = card.imageDataUrl;
+
+          htmlCode += `<div class="card">
+                       <a [routerLink]="['/modifyPhoto', ${card.id}]">
+                         <img src="${img.src}" class="card-img-top" alt="Photo">
+                       </a>
+                     </div>`;
+        }
+      }
+
+      // @ts-ignore
+      cardGroup.innerHTML = htmlCode;
+
+    }).catch((e) => {
+      console.log(e.message)
+    })
+  }
 }
