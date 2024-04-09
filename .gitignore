@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+splash.png
+build.bat
+config.xml
+icon.png
+plugins.bat

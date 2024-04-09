@@ -19,7 +19,6 @@ import {CameraComponent} from "../camera/camera.component";
   styleUrl: './camerapage.component.css'
 })
 export class CamerapageComponent {
-  imgsrc: any
   Min_Length = 5
   Max_length = 20
   //date = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19|20)\d{2}$/
@@ -53,6 +52,8 @@ export class CamerapageComponent {
 
   })
 
+
+
   refName = this.photoForm.controls['_photoName']
   refDateCaptured = this.photoForm.controls['_dateCaptured']
   refDateAdded = this.photoForm.controls['_dateAdded']
@@ -69,11 +70,30 @@ export class CamerapageComponent {
       const favouritePhoto = this.photoForm.value._favouritePhoto!;
       const hidePhoto = this.photoForm.value._hidePhoto!;
 
-      const photo = new Photo(photoName, "", dateCaptured, dateAdded,
+      // Before creating photo, we need to get the image passed, and convert it to DataURL
+      const image: any = document.getElementById('imageSource');
+
+      // Create a canvas for the image:
+      const canvas: any = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      // Assign dimensions:
+      canvas.width = image.width;
+      canvas.height = image.height;
+
+      // Draw the image
+      context.drawImage(image, 0, 0, image.width, image.height);
+
+      // Convert to dataURL:
+      const dataUrl = canvas.toDataURL('image/png');
+      console.log("Data Url: " + dataUrl );
+
+      const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
         [photoTag], favouritePhoto, hidePhoto, photoTagId)
 
       this.dal_service.insertPhoto(photo).then((data) => {
-        alert("Photo added successfully");
+        alert("Photo added successfully: " + dataUrl);
+        alert("Data URL: " + dataUrl);
       }).catch((e) => {
         alert("Photo add failed " + e.message);
       });
