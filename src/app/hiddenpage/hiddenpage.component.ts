@@ -32,6 +32,17 @@ export class HiddenpageComponent {
     if (localStorage.getItem("Password") === null) {
       alert("Please set a Password in Settings Before Using this Page!");
     }
+    else{
+      const password: any = prompt("Please Enter your Password:");
+
+      if(password === localStorage.getItem("Password")){
+        this.loadPhotos();
+      }
+      else{
+        const cardGroup: any = document.getElementById('card-group');
+        cardGroup.innerHTML += `<p>No Password, No Access. 😈</p>`
+      }
+    }
   }
 
   changeSortValue_click() {
@@ -59,7 +70,7 @@ export class HiddenpageComponent {
       let htmlCode = ""
 
       if (data.length === 0) {
-        htmlCode += `<p>No Photos Inside Storage 😭</p>`
+        htmlCode += `<p>No Hidden Photos 😭</p>`
       } else {
         for (let i = 0; i < data.length; i++) {
           const card = data [i]
