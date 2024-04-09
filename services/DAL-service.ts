@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import {DatabaseService} from "./database-service";
-import {Collection, Photo} from "./model-service";
-import {loadIsReferencedAliasDeclarationPatch} from "@angular/compiler-cli/src/ngtsc/imports";
-import any = jasmine.any;
+import {Collection, Photo, Tag} from "./model-service";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +22,6 @@ export class DALService {
 
   // Used on AddPhoto
   insertPhoto(photo: Photo): Promise<any> {
-
       // Create a new promise
       return new Promise( (resolve, reject) => {
         // Create a new transaction:
@@ -513,6 +510,44 @@ export class DALService {
       }
     })
   }
+
+  // *****************************
+  // Tags Crud Operations
+  // *****************************
+
+  // Used on AddPhoto
+  insertTag(tag: Tag): Promise<any> {
+    // Create a new promise
+    return new Promise( (resolve, reject) => {
+      // Create a new transaction:
+      const transaction = this.database.db.transaction(["tags"], "readwrite");
+
+      // Handle outcomes:
+      transaction.oncomplete = (event: any) => {
+        console.log("[DAL] Success: Transaction Initialization");
+      };
+
+      transaction.onerror = (event: any) => {
+        console.log("[DAL] Fail: Transaction Initialization");
+      };
+
+      // Create store param and attempt insertion:
+      const tagStore = transaction.objectStore("tags");
+      const request = tagStore.add(tag);
+
+      // Handle Outcomes:
+      request.onsuccess = (event: any) => {
+        console.log("[DAL] Success: Insertion Request Accepted.");
+        resolve(event.target.result);
+      };
+
+      request.onerror = (event: any) => {
+        console.log("[DAL] Fail: Insertion Request Denied.");
+        reject(event);
+      };
+
+    });
+  };
 
 
 }

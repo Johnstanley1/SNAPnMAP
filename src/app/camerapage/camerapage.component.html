@@ -11,10 +11,10 @@ Student ID: 8864315,
     <div class="card-header text-center">
       <h2>Add Photo</h2>
     </div>
+    <div class="text-center m-3">
+      <img [src]="imgsrc" width="80%" alt="Image placeholder">
+    </div>
     <div class="card-body">
-      <div class="text-center m-3">
-        <img [src]="imgsrc" width="80%" alt="Image placeholder">
-      </div>
       <form [formGroup]="photoForm">
         <div class="mb-3">
           <label for="photoName">Photo Name</label>
@@ -35,7 +35,14 @@ Student ID: 8864315,
         </div>
         <div class="mb-3">
           <label for="dateCaptured">Date Captured</label>
-          <input id="dateCaptured" class="form-control" formControlName="dateCaptured" [value]="currentDate" [readonly]="true">
+          <input id="dateCaptured" type="date" class="form-control" formControlName="_dateCaptured">
+
+          @if (refDateCaptured.invalid && (refDateCaptured.touched || refDateCaptured.dirty)){
+            @if(refDateCaptured.errors?.['required']){
+              <small class="text-danger">Captured date is required</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="dateAdded">Date Added</label>
@@ -51,7 +58,12 @@ Student ID: 8864315,
         <div class="mb-3">
           <label for="photoTag">Tag</label>
           <input id="photoTag" class="form-control" formControlName="_photoTag">
-
+          <div class="text-center m-3 col-3">
+            <button type="button" class="btn btn-outline-info container-fluid" (click)="btnAddTags_click()">Add Tags</button>
+          </div>
+<!--          <ul>-->
+<!--            <li *ngFor="let tag of tag">{{tag.name}}</li>-->
+<!--          </ul>-->
           @if (refTag.invalid && (refTag.touched || refTag.dirty)){
             @if(refTag.errors?.['required']){
               <small class="text-danger">Tag is required</small><br>
@@ -61,20 +73,17 @@ Student ID: 8864315,
         </div>
         <div class="mb-3">
           <div class="form-check form-switch form-check-reverse">
-            <input class="form-check-input" type="checkbox" id="favouritePhoto">
+            <input class="form-check-input" type="checkbox" id="favouritePhoto"  formControlName="_favouritePhoto">
             <label class="form-check-label" for="favouritePhoto">Favourite</label>
           </div>
           <div class="form-check form-switch form-check-reverse">
-            <input class="form-check-input" type="checkbox" id="hidePhoto">
+            <input class="form-check-input" type="checkbox" id="hidePhoto" formControlName="_hidePhoto">
             <label class="form-check-label" for="hidePhoto">Hide Photo</label>
           </div>
         </div>
-        <div class="text-center d-grid gap-2 m-3 col-6 mx-auto">
-          <button class="btn btn-outline-info container-fluid" (click)="$event">Capture photo</button>
+        <div class="text-center d-grid gap-2 m-3 col-3 mx-auto">
+          <button type="submit" class="btn btn-outline-info container-fluid" (click)="$event">Capture photo</button>
           <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnAdd_click()">Save</button>
-        </div>
-        <div class="card-footer">
-          Form values: {{photoForm.value | json}}
         </div>
       </form>
     </div>

@@ -12,14 +12,14 @@ export class Photo{
   id: number| undefined;
   name: string;
   imageDataUrl: string; // Save images as their DataURL
-  dateCaptured: Date;
-  dateAdded: Date;
+  dateCaptured: string;
+  dateAdded: string;
   tags: string[];
   favourite: boolean;
   hidden: boolean;
   tagId: number
 
-  constructor(name: string, dataUrl: string, dateCaptured: Date, dateAdded: Date,tags: string[],
+  constructor(name: string, dataUrl: string, dateCaptured: string, dateAdded: string,tags: string[],
               favourite: boolean, hidden: boolean, tagId: number ) {
     this.name = name
     this.imageDataUrl = dataUrl
@@ -33,11 +33,10 @@ export class Photo{
 }
 
 export class Tag{
-  id: number
+  id: number | undefined
   name: string
 
-  constructor(id: number, name: string) {
-    this.id = id
+  constructor(name: string) {
     this.name = name
   }
 

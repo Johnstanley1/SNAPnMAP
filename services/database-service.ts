@@ -64,19 +64,15 @@ export class DatabaseService {
           keyPath: "id",
           autoIncrement: true
         })
-
-        this.photoData.forEach((items)=>{
-          photoStore.add(items)
-        })
-
-        this.collectionData.forEach((items)=>{
-          collectionStore.add(items)
-        })
-
-        this.tagData.forEach((items)=>{
-          tagStore.add(items)
-        })
       }
+    })
+  }
+
+  initDatabase() {
+    this.createDatabase().then((data)=>{
+      console.log("Database created successfully" + data)
+    }).catch((e)=>{
+      console.log("Database created successfully" + e.message)
     })
   }
 }

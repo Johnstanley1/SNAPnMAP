@@ -12,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
 import {HomepageComponent} from "./homepage/homepage.component";
-import {GlobalService} from "../../services/global-service";
+import {DatabaseService} from "../../services/database-service";
 
 @Component({
   selector: 'app-root',
@@ -21,12 +21,11 @@ import {GlobalService} from "../../services/global-service";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   title: string = "Snap&Map";
-  globalService = new GlobalService();
-  constructor() {}
-
-  ngOnInit(): void {
-    this.globalService.initDB();
+  database = inject((DatabaseService))
+  constructor() {
+    this.database.initDatabase()
   }
+
 }

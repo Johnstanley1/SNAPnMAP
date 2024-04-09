@@ -35,7 +35,14 @@ Student ID: 8864315,
         </div>
         <div class="mb-3">
           <label for="modifyDateCaptured">Date Captured</label>
-          <input id="modifyDateCaptured" class="form-control" formControlName="_modifyDateCaptured" [value]="currentDate" [readonly]="true">
+          <input id="modifyDateCaptured" type="date" class="form-control" formControlName="_modifyDateCaptured">
+
+          @if (refModifiedDateCaptured.invalid && (refModifiedDateCaptured.touched || refModifiedDateCaptured.dirty)){
+            @if(refModifiedDateCaptured.errors?.['required']){
+              <small class="text-danger">Captured date is required</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="modifyDateAdded">Date Added</label>
@@ -51,7 +58,9 @@ Student ID: 8864315,
         <div class="mb-3">
           <label for="modifyPhotoTag">Tag</label>
           <input id="modifyPhotoTag" class="form-control" formControlName="_modifyPhotoTag">
-
+          <div class="text-center m-3 col-3">
+            <button type="button" class="btn btn-outline-info container-fluid" (click)="btnModifyTags_click()">Add Tags</button>
+          </div>
           @if (refModifyTag.invalid && (refModifyTag.touched || refModifyTag.dirty)){
             @if(refModifyTag.errors?.['required']){
               <small class="text-danger">Tag is required</small><br>
@@ -61,11 +70,11 @@ Student ID: 8864315,
         </div>
         <div class="mb-3">
           <div class="form-check form-switch form-check-reverse">
-            <input class="form-check-input" type="checkbox" id="modifyFavouritePhoto">
+            <input class="form-check-input" type="checkbox" id="modifyFavouritePhoto" formControlName="_modifyFavouritePhoto">
             <label class="form-check-label" for="modifyFavouritePhoto">Favourite</label>
           </div>
           <div class="form-check form-switch form-check-reverse">
-            <input class="form-check-input" type="checkbox" id="modifyHidePhoto">
+            <input class="form-check-input" type="checkbox" id="modifyHidePhoto" formControlName="_modifyHidePhoto">
             <label class="form-check-label" for="modifyHidePhoto">Hide Photo</label>
           </div>
         </div>
