@@ -66,5 +66,9 @@ export class SettingpageComponent {
     }
   }
 
+  setPassword_click(){
+    prompt("Please Provide a Password:");
+  }
+
 
 }
