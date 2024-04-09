@@ -48,5 +48,5 @@ export class CameraService {
     });
   }
 
-    constructor() { }
+  constructor() { }
 }
