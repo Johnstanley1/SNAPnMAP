@@ -12,26 +12,52 @@ Student ID: 8864315,
       <h2>Modify Photo</h2>
     </div>
     <div class="card-body">
-
       <div class="text-center m-3">
         <img [src]="imgsrc" width="80%" alt="Image placeholder">
       </div>
-      <form #modifyPhoto="ngForm">
+      <form [formGroup]="modifyPhotoForm">
         <div class="mb-3">
           <label for="photoNameModify">Photo Name</label>
-          <input id="photoNameModify" type="text" class="form-control" name="photoNameModify">
+          <input id="photoNameModify" type="text" class="form-control" formControlName="_photoNameModify">
+
+          @if (refModifyName.invalid && (refModifyName.touched || refModifyName.dirty)){
+            @if(refModifyName.errors?.['required']){
+              <small class="text-danger">Name is required</small><br>
+            }
+            @if(refModifyName.errors?.['minlength']){
+              <small class="text-danger">Name must be at least {{Min_Length}} char long</small><br>
+            }
+            @if(refModifyName.errors?.['maxlength']){
+              <small class="text-danger">Name must be at most {{Max_length}} char long</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="modifyDateCaptured">Date Captured</label>
-          <input id="modifyDateCaptured" class="form-control" name="modifyDateCaptured" [value]="currentDate" [readonly]="true">
+          <input id="modifyDateCaptured" class="form-control" formControlName="_modifyDateCaptured" [value]="currentDate" [readonly]="true">
         </div>
         <div class="mb-3">
           <label for="modifyDateAdded">Date Added</label>
-          <input id="modifyDateAdded" type="date" class="form-control" name="modifyDateAdded">
+          <input id="modifyDateAdded" type="date" class="form-control" formControlName="_modifyDateAdded">
+
+          @if (refModifyDateAdded.invalid && (refModifyDateAdded.touched || refModifyDateAdded.dirty)){
+            @if(refModifyDateAdded.errors?.['required']){
+              <small class="text-danger">Added date is required</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="modifyPhotoTag">Tag</label>
-          <input id="modifyPhotoTag" class="form-control" name="modifyPhotoTag">
+          <input id="modifyPhotoTag" class="form-control" formControlName="_modifyPhotoTag">
+
+          @if (refModifyTag.invalid && (refModifyTag.touched || refModifyTag.dirty)){
+            @if(refModifyTag.errors?.['required']){
+              <small class="text-danger">Tag is required</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <div class="form-check form-switch form-check-reverse">
@@ -45,10 +71,10 @@ Student ID: 8864315,
         </div>
         <div class="text-center m-3 col-6 mx-auto d-grid gap-2">
           <button class="btn btn-outline-info container-fluid" (click)="$event">Capture Photo</button>
-          <button class="btn btn-outline-info container-fluid" (click)="$event">Update</button>
+          <button class="btn btn-outline-info container-fluid" (click)="btnModify_click()">Update</button>
         </div>
         <div class="card-footer">
-          Form values: {{modifyPhoto.value | json}}
+          Form values: {{modifyPhotoForm.value | json}}
         </div>
       </form>
     </div>

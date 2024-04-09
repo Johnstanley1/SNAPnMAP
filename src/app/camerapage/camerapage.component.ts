@@ -2,7 +2,6 @@ import {Component, inject} from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
 import {Photo} from "../../../services/model-service";
-import {FacadeService} from "../../../services/facade-service";
 
 @Component({
   selector: 'app-camerapage',
@@ -20,10 +19,9 @@ export class CamerapageComponent {
   Min_Length = 5
   Max_length = 20
   date = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19|20)\d{2}$/
+  currentDate: string = new Date().toLocaleDateString("en-CA")
 
   builder = inject(FormBuilder)
-
-  currentDate: string = new Date().toLocaleDateString("en-CA")
 
   photo = new Photo("", "", new Date(), new Date(), [], true, false, 2)
 

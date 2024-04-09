@@ -11,25 +11,58 @@ Student ID: 8864315,
       <h2>Modify Collection</h2>
     </div>
     <div class="card-body">
-      <form #collectionModifyForm="ngForm">
+      <form [formGroup]="collectionModifyForm">
         <div class="mb-3">
           <label for="nameModify">Collection Name</label>
-          <input id="nameModify" type="text" class="form-control" name="nameModify"
-                 [(ngModel)]="collection.name" #name="ngModel"
-          >
+          <input id="nameModify" type="text" class="form-control" formControlName="_nameModify">
+
+          @if (refName.invalid && (refName.touched || refName.dirty)){
+            @if(refName.errors?.['required']){
+              <small class="text-danger">Collection name  is required</small><br>
+            }
+            @if(refName.errors?.['minlength']){
+              <small class="text-danger">Collection name must be at least {{Min_Length}} char long</small><br>
+            }
+            @if(refName.errors?.['maxlength']){
+              <small class="text-danger">Collection name must be at most {{Max_length}} char long</small><br>
+            }
+          }
+
         </div>
 
         <div class="mb-3">
-          <label for="thumbnailsModify">Collection Thumbnail</label>
-          <input id="thumbnailsModify" type="number" class="form-control" name="thumbnailsModify">
+          <label for="thumbnailsModify">Collection Thumbnail</label><br>
+          <input id="thumbnailsModify" type="file" accept="image/*" (change)="onFileSelected($event)"
+                 style="border: 2px solid gainsboro;" formControlName="_thumbnailsModify"><br>
+
+          @if (refThumbnails.invalid && (refThumbnails.touched || refThumbnails.dirty)){
+            @if(refThumbnails.errors?.['required']){
+              <small class="text-danger">Please select image to add to collection</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="dateModify">Collection Date</label>
-          <input id="dateModify" type="date" class="form-control" name="dateModify">
+          <input id="dateModify" type="date" class="form-control" formControlName="_dateModify">
+
+          @if (refDate.invalid && (refDate.touched || refDate.dirty)){
+            @if(refDate.errors?.['required']){
+              <small class="text-danger">Collection date is required</small><br>
+            }
+          }
+
         </div>
         <div class="mb-3">
           <label for="descriptionModify">Description</label>
-          <textarea id="descriptionModify" class="form-control" name="descriptionModify"></textarea>
+          <textarea id="descriptionModify" class="form-control" formControlName="_descriptionModify"></textarea>
+
+          @if (refDescription.invalid && (refDescription.touched || refDescription.dirty)){
+            @if(refDescription.errors?.['required']){
+              <small class="text-danger">Please add collection description</small><br>
+            }
+          }
+
         </div>
 
         <div class="text-center m-3 col-6 mx-auto">
