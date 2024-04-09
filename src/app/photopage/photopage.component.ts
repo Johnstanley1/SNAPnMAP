@@ -58,16 +58,19 @@ export class PhotopageComponent implements OnInit{
         for (let i = 0; i < data.length; i++) {
           const card = data [i]
 
-          // Create new image and assign it the saved dataUrl:
-          const img = new Image();
-          img.src = card.imageDataUrl;
+          // CHECK IF THE PHOTO HAS HIDDEN ATTRIBUTE:
+          if(!card.hidden){
+            // Create new image and assign it the saved dataUrl:
+            const img = new Image();
+            img.src = card.imageDataUrl;
 
-          htmlCode += `<div class="card">
+            htmlCode += `<div class="card">
                        <a [routerLink]="['/modifyPhoto', ${card.id}]">
                          <img src="${img.src}" class="card-img-top" alt="Photo">
                        </a>
                      </div>`;
-        }
+          }
+          }
       }
 
       // @ts-ignore
