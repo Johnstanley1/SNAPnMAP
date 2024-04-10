@@ -84,12 +84,10 @@ Student ID: 8864315,
         <div class="text-center d-grid gap-2 m-3 col-3 mx-auto">
           <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnAdd_click()">Save</button>
         </div>
+        <div class="text-center m-3">
+          <app-maplocation></app-maplocation>
+        </div>
       </form>
-    </div>
-    <div class="m-md-3">
-      <div class="tempData">
-        <p>Values: {{ photoForm.value | json }} </p>
-      </div>
     </div>
   </div>
 </div>

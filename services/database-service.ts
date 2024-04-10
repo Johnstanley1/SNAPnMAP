@@ -70,7 +70,7 @@ export class DatabaseService {
 
   initDatabase() {
     this.createDatabase().then((data)=>{
-      console.log("Database created successfully" + data)
+      console.log("Database created successfully")
     }).catch((e)=>{
       console.log("Database created successfully" + e.message)
     })

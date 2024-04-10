@@ -1,9 +1,11 @@
 import {Component, inject} from '@angular/core';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgForOf} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {CameraComponent} from "../camera/camera.component";
+import {MaplocationComponent} from "../maplocation/maplocation.component";
+
 
 @Component({
   selector: 'app-camerapage',
@@ -13,16 +15,19 @@ import {CameraComponent} from "../camera/camera.component";
     JsonPipe,
     ReactiveFormsModule,
     NgForOf,
-    CameraComponent
+    CameraComponent,
+    MaplocationComponent,
   ],
   templateUrl: './camerapage.component.html',
   styleUrl: './camerapage.component.css'
 })
 export class CamerapageComponent {
+  constructor() {
+
+  }
+
   Min_Length = 5
   Max_length = 20
-  //date = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19|20)\d{2}$/
-  // currentDate: string = new Date().toLocaleDateString("en-CA")
 
   builder = inject(FormBuilder)
 
@@ -52,8 +57,6 @@ export class CamerapageComponent {
 
   })
 
-
-
   refName = this.photoForm.controls['_photoName']
   refDateCaptured = this.photoForm.controls['_dateCaptured']
   refDateAdded = this.photoForm.controls['_dateAdded']
@@ -62,6 +65,7 @@ export class CamerapageComponent {
   btnAdd_click() {
     if (this.photoForm.valid) {
       console.log("Add photo form valid")
+
       const photoName = this.photoForm.value._photoName!;
       const dateCaptured = this.photoForm.value._dateCaptured!;
       const dateAdded = this.photoForm.value._dateAdded!;

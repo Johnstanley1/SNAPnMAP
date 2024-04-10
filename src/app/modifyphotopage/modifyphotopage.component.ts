@@ -4,6 +4,7 @@ import {JsonPipe} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {isEmpty} from "rxjs";
+import {MaplocationComponent} from "../maplocation/maplocation.component";
 
 @Component({
   selector: 'app-modifyphotopage',
@@ -11,7 +12,8 @@ import {isEmpty} from "rxjs";
   imports: [
     FormsModule,
     JsonPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaplocationComponent
   ],
   templateUrl: './modifyphotopage.component.html',
   styleUrl: './modifyphotopage.component.css'
@@ -20,13 +22,9 @@ export class ModifyphotopageComponent {
   imgsrc: any
   Min_Length = 5
   Max_length = 20
-  // date = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19|20)\d{2}$/
-  // currentDate: string = new Date().toLocaleDateString("en-CA")
 
   builder = inject(FormBuilder)
   dal_service = inject(DALService)
-
-  modifyPhoto = new Photo("", "", "", "", [], true, false, 2)
 
   modifyPhotoForm = this.builder.group({
     _photoNameModify: ["",

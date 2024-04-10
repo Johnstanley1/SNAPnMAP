@@ -2,6 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {DALService} from "../../../services/DAL-service";
 import {NgForOf} from "@angular/common";
+import {MaplocationComponent} from "../maplocation/maplocation.component";
 
 @Component({
   selector: 'app-photopage',
@@ -19,6 +20,7 @@ export class PhotopageComponent implements OnInit{
   sortString: string = this.sortData[1]
 
   loadPhoto = inject(DALService)
+  renderMap = new MaplocationComponent()
 
   constructor() {
 
