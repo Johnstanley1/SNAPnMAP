@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {RouterLink, Router} from "@angular/router";
 import {DALService} from "../../../services/DAL-service";
 import {NgForOf} from "@angular/common";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
@@ -22,7 +22,8 @@ export class PhotopageComponent implements OnInit{
   loadPhoto = inject(DALService)
   renderMap = new MaplocationComponent()
 
-  constructor() {
+  // Pass the router through the constructor for usage later
+  constructor(private router: Router) {
 
   }
 
@@ -67,7 +68,7 @@ export class PhotopageComponent implements OnInit{
             img.src = card.imageDataUrl;
 
             htmlCode += `<div class="card">
-                       <a [routerLink]="['/modifyPhoto', ${card.id}]">
+                       <a [routerLink]="['/modifyPhoto', card.id]">
                          <img src="${img.src}" class="card-img-top" alt="Photo">
                        </a>
                      </div>`;
@@ -81,5 +82,5 @@ export class PhotopageComponent implements OnInit{
     }).catch((e) => {
       console.log(e.message)
     })
-  }
+  };
 }

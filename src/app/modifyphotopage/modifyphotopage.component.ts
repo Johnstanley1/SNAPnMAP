@@ -1,10 +1,12 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit } from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {isEmpty} from "rxjs";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
+import { ActivatedRoute, Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-modifyphotopage',
@@ -18,8 +20,37 @@ import {MaplocationComponent} from "../maplocation/maplocation.component";
   templateUrl: './modifyphotopage.component.html',
   styleUrl: './modifyphotopage.component.css'
 })
-export class ModifyphotopageComponent {
-  imgsrc: any
+export class ModifyphotopageComponent implements OnInit{
+
+  // Initialize params to hold selected PhotoID:
+  photoId: number = -1;
+  photo: any;
+  imgSrc: any
+
+  // Get data from ActivatedRoute and Initialize a Router (to return back to photoList)
+  constructor(private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit() {
+    // Get ID passed by ActivatedRoute:
+    this.route.params.subscribe( (data) => {
+      // Convert saved ID to number
+      this.photoId = +data['id'];
+
+      // Get photo data from DAL:
+      this.photo = this.dal_service
+        .selectPhoto(this.photoId)
+        .then( (data) => {
+          console.log("Photo Retrieved Successfully.");
+        })
+        .catch( (e) => {
+          alert("Failed to Retrieve Photo Data: " + e);
+        });
+
+      // Apply dataURL to the image source's src variable:
+      this.imgSrc.src = this.photo.imageDataUrl;
+    });
+  };
+
   Min_Length = 5
   Max_length = 20
 
@@ -86,11 +117,16 @@ export class ModifyphotopageComponent {
     if (tag == null){
       console.log("Please add tags")
     }else{
-      this.dal_service.insertTag(photoTag).then((data)=>{
-        console.log("Tag added successfully " + data);
-      }).catch((e)=>{
-        console.log(e.message)
-      })
+      this.dal_service
+        .insertTag(photoTag)
+        .then((data)=>{
+          console.log("Tag added successfully " + data); })
+        .catch((e)=>{
+          alert("An Error Occurred When Inserting the Photo: " + e.message)
+        })
+
+      // Navigate back to photolist:
+      this.router.navigate(["/photo"]);
     }
   }
 }
