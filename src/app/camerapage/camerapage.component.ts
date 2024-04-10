@@ -7,6 +7,7 @@ import {CameraComponent} from "../camera/camera.component";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
 
 
+// Components
 @Component({
   selector: 'app-camerapage',
   standalone: true,
