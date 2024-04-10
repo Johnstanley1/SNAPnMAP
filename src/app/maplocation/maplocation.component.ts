@@ -38,7 +38,8 @@ export class MaplocationComponent {
 
   public showMap() {
     console.log("showing map: ")
-    document.getElementById('mapContainer')!.innerHTML = '';
+    let container = document.getElementById('mapContainer')!
+    container.innerHTML = '';
 
     // Initialize the platform object:
     var platform = new H.service.Platform({

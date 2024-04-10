@@ -13,3 +13,9 @@
   padding-left: 15px;
   margin-left: 15px;
 }
+
+.card-group img {
+  max-width: 100%;
+  height: auto;
+
+}

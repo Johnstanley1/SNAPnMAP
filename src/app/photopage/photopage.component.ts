@@ -20,7 +20,6 @@ export class PhotopageComponent implements OnInit{
   sortString: string = this.sortData[1]
 
   loadPhoto = inject(DALService)
-  renderMap = new MaplocationComponent()
 
   // Pass the router through the constructor for usage later
   constructor(private router: Router) {
@@ -51,7 +50,7 @@ export class PhotopageComponent implements OnInit{
     this.loadPhoto.selectAllPhotos().then((data) => {
 
       // Get card group:
-      const cardGroup = document.getElementById('card-group');
+      let cardGroup = document.getElementById('card-group')!;
 
       let htmlCode = ""
 
@@ -65,18 +64,18 @@ export class PhotopageComponent implements OnInit{
           if(!card.hidden){
             // Create new image and assign it the saved dataUrl:
             const img = new Image();
-            img.src = card.imageDataUrl;
+            //img.src = card.imageDataUrl;
 
             htmlCode += `<div class="card">
-                       <a [routerLink]="['/modifyPhoto', card.id]">
-                         <img src="${img.src}" class="card-img-top" alt="Photo">
+                       <a href="/modifyPhoto" data-row-id="${card.id}" role="button">
+                         <img src="${card.imageDataUrl}" class="card-img-top" alt="Photo">
+                         <p>Testing if this works</p>
                        </a>
                      </div>`;
           }
-          }
+        }
       }
 
-      // @ts-ignore
       cardGroup.innerHTML = htmlCode;
 
     }).catch((e) => {
