@@ -5,6 +5,7 @@ import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {CameraComponent} from "../camera/camera.component";
 
+// Components
 @Component({
   selector: 'app-camerapage',
   standalone: true,
