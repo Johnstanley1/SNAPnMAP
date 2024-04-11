@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {JsonPipe, NgIf} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
-import {isEmpty} from "rxjs";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -42,7 +41,6 @@ export class ModifyphotopageComponent implements OnInit{
       this.photo = this.dal_service
         .selectPhoto(this.id)
         .then( (data) => {
-          alert("Photo Retrieved Successfully.");
 
           // Assign data to photo:
           this.photo = data;
@@ -66,7 +64,6 @@ export class ModifyphotopageComponent implements OnInit{
 
   updateDataUrl(photo: Photo){
     this.dataURL = photo.imageDataUrl;
-    alert("Data URL: " + this.dataURL);
   }
 
   Min_Length = 5

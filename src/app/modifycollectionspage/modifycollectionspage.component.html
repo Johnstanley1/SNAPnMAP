@@ -10,7 +10,10 @@ Student ID: 8864315,
     <div class="card-header text-center">
       <h2>Modify Collection</h2>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="collection">
+      <div class="text-center m-3">
+        <img [src]="collection.thumbnailPhoto" width="80%" alt="Collection Thumbnail">
+      </div>
       <form [formGroup]="collectionModifyForm">
         <div class="mb-3">
           <label for="nameModify">Collection Name</label>
@@ -27,21 +30,8 @@ Student ID: 8864315,
               <small class="text-danger">Collection name must be at most {{Max_length}} char long</small><br>
             }
           }
-
         </div>
 
-        <div class="mb-3">
-          <label for="thumbnailsModify">Collection Thumbnail</label><br>
-          <input id="thumbnailsModify" type="file" accept="image/*" (change)="onFileSelected($event)"
-                 style="border: 2px solid gainsboro;" formControlName="_thumbnailsModify"><br>
-
-          @if (refThumbnails.invalid && (refThumbnails.touched || refThumbnails.dirty)){
-            @if(refThumbnails.errors?.['required']){
-              <small class="text-danger">Please select image to add to collection</small><br>
-            }
-          }
-
-        </div>
         <div class="mb-3">
           <label for="dateModify">Collection Date</label>
           <input id="dateModify" type="date" class="form-control" formControlName="_dateModify">
@@ -66,7 +56,8 @@ Student ID: 8864315,
         </div>
 
         <div class="text-center m-3 col-6 mx-auto">
-          <button class="btn btn-outline-info container-fluid" (click)="$event">Update</button>
+          <button class="btn btn-outline-info container-fluid" (click)="btnUpdate_click()">Update</button>
+          <button class="btn btn-outline-danger container-fluid" (click)="btnDelete_click()">Delete</button>
         </div>
       </form>
     </div>

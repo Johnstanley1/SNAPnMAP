@@ -86,6 +86,7 @@ export class AddcollectionspageComponent {
         .catch( (e) => {
           alert("An Error Occurred Attempting to Insert Collection: " + e.message);
         });
+
     }
     else{
       alert("Form is not Valid.")
