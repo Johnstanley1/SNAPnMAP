@@ -50,7 +50,6 @@ export class PhotopageComponent implements OnInit{
   loadPhotos() {
     console.log("LOAD PHOTOS CALLED");
 
-
     this.loadPhoto.selectAllPhotos().then((data) => {
       // Clear existing photos before pushing new ones (optional, depends on your requirements)
       this.photos = [];

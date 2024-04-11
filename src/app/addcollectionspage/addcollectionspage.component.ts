@@ -34,13 +34,8 @@ export class AddcollectionspageComponent {
       Validators.maxLength(this.Max_length)]
     ],
 
-    _thumbnails: ["",
-      [Validators.required]
-    ],
-
     _date: ["",
-      [Validators.required,
-      Validators.pattern(this.date)]
+      [Validators.required]
     ],
 
     _description: ["",
@@ -49,7 +44,6 @@ export class AddcollectionspageComponent {
   })
 
   refName = this.collectionForm.controls['_name']
-  refThumbnails = this.collectionForm.controls['_thumbnails']
   refDate = this.collectionForm.controls['_date']
   refDescription = this.collectionForm.controls['_description']
 
@@ -87,11 +81,15 @@ export class AddcollectionspageComponent {
       this.dal_service
         .insertCollection(collection)
         .then( (data) => {
-          alert("Collection Added Successfully: " + dataUrl);
+          alert("Collection Added Successfully");
         })
         .catch( (e) => {
           alert("An Error Occurred Attempting to Insert Collection: " + e.message);
         });
+
+    }
+    else{
+      alert("Form is not Valid.")
     }
 
 

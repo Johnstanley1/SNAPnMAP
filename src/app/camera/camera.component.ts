@@ -1,10 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {CameraService} from "../../../services/camera.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-camera',
   standalone: true,
-  imports: [],
+  imports: [
+    ReactiveFormsModule
+  ],
   templateUrl: './camera.component.html',
   styleUrl: './camera.component.css'
 })

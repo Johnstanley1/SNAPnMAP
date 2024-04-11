@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {JsonPipe, NgIf} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
-import {isEmpty} from "rxjs";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -42,13 +41,9 @@ export class ModifyphotopageComponent implements OnInit{
       this.photo = this.dal_service
         .selectPhoto(this.id)
         .then( (data) => {
-          alert("Photo Retrieved Successfully.");
 
           // Assign data to photo:
           this.photo = data;
-
-          // Assign DataURL to global variable (needed for saving):
-          this.dataURL = data.dataURL;
 
           // Apply data to the fields inside the form:
           this.modifyPhotoForm.get('_photoNameModify')?.setValue(this.photo.name);
@@ -58,12 +53,18 @@ export class ModifyphotopageComponent implements OnInit{
           this.modifyPhotoForm.get('_modifyFavouritePhoto')?.setValue(this.photo.favourite);
           this.modifyPhotoForm.get('_modifyHidePhoto')?.setValue(this.photo.hidden);
 
+          // Assign data URL data:
+          this.updateDataUrl(this.photo)
         })
         .catch( (e) => {
           alert("Failed to Retrieve Photo Data: " + e);
         });
     });
   };
+
+  updateDataUrl(photo: Photo){
+    this.dataURL = photo.imageDataUrl;
+  }
 
   Min_Length = 5
   Max_length = 20
@@ -128,6 +129,22 @@ export class ModifyphotopageComponent implements OnInit{
     }else{
       alert("Add photo form is invalid")
     }
+  }
+
+  btnDelete_click(){
+        if(confirm("Are you Sure you want to Delete this Photo?")){
+          // Delete Photo from DB
+          this.dal_service
+            .deletePhoto(this.photo)
+            .then( () => {
+              alert("Photo Deleted. ☹");
+              // Route user back to photo list
+              this.router.navigate(["/photo"]);
+            })
+            .catch( (e) => {
+              alert("Failed to Delete Photo: " + e)
+            })
+        }
   }
 
   btnModifyTags_click() {
