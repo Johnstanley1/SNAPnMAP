@@ -26,13 +26,20 @@ export class CamerapageComponent {
   constructor() {
 
   }
-
+  tags: string[] = []
   Min_Length = 5
   Max_length = 20
 
   builder = inject(FormBuilder)
 
   dal_service = inject(DALService)
+
+  tagForm = this.builder.group({
+    _tagName: ["",
+      [Validators.required,
+        Validators.maxLength(this.Max_length)]
+    ],
+  })
 
   photoForm = this.builder.group({
     _photoName: ["",
@@ -49,10 +56,6 @@ export class CamerapageComponent {
       [Validators.required],
     ],
 
-    _photoTag: ["",
-      [Validators.required]
-    ],
-
     _favouritePhoto:[false],
     _hidePhoto:[false]
 
@@ -61,17 +64,17 @@ export class CamerapageComponent {
   refName = this.photoForm.controls['_photoName']
   refDateCaptured = this.photoForm.controls['_dateCaptured']
   refDateAdded = this.photoForm.controls['_dateAdded']
-  refTag = this.photoForm.controls['_photoTag']
+  refTag = this.tagForm.controls['_tagName']
 
   btnAdd_click() {
     if (this.photoForm.valid) {
       console.log("Add photo form valid")
 
+      const tag: string[] =  this.tags
       const photoName = this.photoForm.value._photoName!;
       const dateCaptured = this.photoForm.value._dateCaptured!;
       const dateAdded = this.photoForm.value._dateAdded!;
-      const photoTag = this.photoForm.value._photoTag!;
-      const photoTagId = parseInt(photoTag);
+      const photoTagId = parseInt(this.tags.toString());
       const favouritePhoto = this.photoForm.value._favouritePhoto!;
       const hidePhoto = this.photoForm.value._hidePhoto!;
 
@@ -94,11 +97,11 @@ export class CamerapageComponent {
       console.log("Data Url: " + dataUrl );
 
       const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
-        [photoTag], favouritePhoto, hidePhoto, photoTagId)
+        tag, favouritePhoto, hidePhoto, photoTagId)
 
       this.dal_service.insertPhoto(photo).then((data) => {
-        alert("Photo added successfully: " + dataUrl);
-        alert("Data URL: " + dataUrl);
+        alert("Photo added successfully: " + tag);
+        alert("Data URL: " + tag);
       }).catch((e) => {
         alert("Photo add failed " + e.message);
       });
@@ -108,16 +111,29 @@ export class CamerapageComponent {
   }
 
   btnAddTags_click() {
-    const tag = this.photoForm.value._photoTag!
+
+  }
+
+  btnAddTag_click() {
+    const tag = this.tagForm.value._tagName!
     const photoTag = new Tag(tag)
-    if (tag == null){
-      console.log("Please add tags")
+    if (this.tagForm.invalid){
+      alert("Please add tags")
     }else{
       this.dal_service.insertTag(photoTag).then((data)=>{
-        console.log("Tag added successfully " + data);
+        this.tags.push(tag)
+        alert("Tag added successfully " + data);
       }).catch((e)=>{
         console.log(e.message)
       })
     }
+  }
+
+  btnDeleteTag_click() {
+    // this.dal_service.deleteTag().then(()=>{
+    //
+    // }).catch(()=>{
+    //
+    // })
   }
 }

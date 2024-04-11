@@ -549,5 +549,34 @@ export class DALService {
     });
   };
 
+  deleteTag(collection: Collection): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const transaction = this.database.db.transaction(["collections"], "readwrite");
 
+      transaction.oncomplete = (event: any) => {
+        console.log("[DAL] Success: Transaction Delete Initialization");
+      };
+      transaction.onerror = (event: any) => {
+        console.log("[DAL] Fail: Transaction Delete Initialization: " + event);
+      };
+
+      const collectionStore = transaction.objectStore("collections");
+
+      if (collection.id) {
+        const request = collectionStore.delete(collection.id);
+
+        request.onsuccess = (event: any) => {
+          console.log("[DAL] Success: Delete Request Accepted.");
+          resolve(event);
+        };
+        request.onerror = (event: any) => {
+          console.log("[DAL] Fail: Delete Request Denied: " + event);
+          reject(event);
+        };
+      } else {
+        reject("Collection Does Not Posses An ID.")
+      }
+
+    });
+  }
 }
