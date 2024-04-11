@@ -3,8 +3,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {JsonPipe, NgIf} from "@angular/common";
 import {Photo, Tag, Collection} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
-import {MaplocationComponent} from "../maplocation/maplocation.component";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 
 
 @Component({
@@ -14,7 +13,8 @@ import { ActivatedRoute, Router } from "@angular/router";
     FormsModule,
     JsonPipe,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    RouterModule
   ],
   templateUrl: './modifycollectionspage.component.html',
   styleUrl: './modifycollectionspage.component.css'
@@ -131,5 +131,9 @@ export class ModifycollectionspageComponent {
           alert("Failed to Delete Collection: " + e);
         })
     }
+  }
+
+  btnViewPhotos_click(){
+
   }
 }
