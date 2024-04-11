@@ -47,9 +47,6 @@ export class ModifyphotopageComponent implements OnInit{
           // Assign data to photo:
           this.photo = data;
 
-          // Assign DataURL to global variable (needed for saving):
-          this.dataURL = data.dataURL;
-
           // Apply data to the fields inside the form:
           this.modifyPhotoForm.get('_photoNameModify')?.setValue(this.photo.name);
           this.modifyPhotoForm.get('_modifyDateCaptured')?.setValue(this.photo.dateCaptured);
@@ -58,12 +55,19 @@ export class ModifyphotopageComponent implements OnInit{
           this.modifyPhotoForm.get('_modifyFavouritePhoto')?.setValue(this.photo.favourite);
           this.modifyPhotoForm.get('_modifyHidePhoto')?.setValue(this.photo.hidden);
 
+          // Assign data URL data:
+          this.updateDataUrl(this.photo)
         })
         .catch( (e) => {
           alert("Failed to Retrieve Photo Data: " + e);
         });
     });
   };
+
+  updateDataUrl(photo: Photo){
+    this.dataURL = photo.imageDataUrl;
+    alert("Data URL: " + this.dataURL);
+  }
 
   Min_Length = 5
   Max_length = 20
