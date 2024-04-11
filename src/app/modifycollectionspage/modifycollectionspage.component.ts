@@ -124,7 +124,7 @@ export class ModifycollectionspageComponent {
     if(confirm("Are you Sure you Want to Delete this Collection?")){
       // Delete photo after confirm:
       this.dal_service
-        .deletePhoto(this.collection)
+        .deleteCollection(this.collection)
         .then( () => {
           alert("Collection Deleted. 😭");
         })
