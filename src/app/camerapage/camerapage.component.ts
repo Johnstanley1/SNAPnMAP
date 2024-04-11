@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgForOf} from "@angular/common";
-import {Photo, Tag} from "../../../services/model-service";
+import {ModelService, Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {CameraComponent} from "../camera/camera.component";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
@@ -129,11 +129,4 @@ export class CamerapageComponent {
     }
   }
 
-  btnDeleteTag_click() {
-    // this.dal_service.deleteTag().then(()=>{
-    //
-    // }).catch(()=>{
-    //
-    // })
-  }
 }
