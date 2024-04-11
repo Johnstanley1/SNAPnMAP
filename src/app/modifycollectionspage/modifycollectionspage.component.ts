@@ -80,8 +80,7 @@ export class ModifycollectionspageComponent {
     ],
 
     _dateModify: ["",
-      [Validators.required,
-        Validators.pattern(this.date)]
+      [Validators.required]
     ],
 
     _descriptionModify: ["",
