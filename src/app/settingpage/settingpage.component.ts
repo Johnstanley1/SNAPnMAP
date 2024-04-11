@@ -127,10 +127,12 @@ export class SettingpageComponent {
   }
 
   btnDeleteTag_click() {
-    this.dal_service.deleteAllTags().then((data)=>{
-      alert("tag removed " +  data)
-    }).catch((e)=>{
-      console.log(e.message)
-    })
+    if (confirm("Sure to clear all tags?")){
+      this.dal_service.deleteAllTags().then((data)=>{
+        alert("tag removed " +  data)
+      }).catch((e)=>{
+        console.log(e.message)
+      })
+    }
   }
 }
