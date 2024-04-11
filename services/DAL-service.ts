@@ -454,62 +454,54 @@ export class DALService {
   }
 
   removePhotoFromCollection(collectionId: number, photoId: number): Promise<any> {
-    return new Promise( (resolve, reject) => {
 
+    // Return new promise
+    return new Promise((resolve, reject) => {
+
+      // Create transaction and assign a collectionStore
       const transaction = this.database.db.transaction(["collections"], "readwrite");
+      const collectionStore = transaction.objectStore("collections");
+
+      // Get the collection from the passed ID
+      const getRequest = collectionStore.get(collectionId);
 
       // Handle outcomes:
-      transaction.oncomplete = (event: any) => {
-        console.log("[DAL] Success: RemovePhotoFromCollection Transaction.");
-      }
-
-      transaction.onerror = (event: any) => {
-        console.log("[DAL] Fail: RemovePhotoFromCollection Transaction.");
-      }
-
-      // Create store and get collection via ID:
-      const collectionStore = transaction.objectStore("collections");
-      const request = collectionStore.get(collectionId);
-
-      request.onsuccess = (event: any) => {
-        // Get collection from event:
+      getRequest.onsuccess = (event: any) => {
+        // Assign the collection to the event result:
         const collection = event.target.result;
 
-        // Remove photo from the array of photos:
-        if(collection){
-          if(collection.photos){
-            // Filter the collection so that the corresponding id is removed:
-            collection.photos.filter((photo: Photo) => photo.id !== photoId );
+        // Check if the collection has an initialized array of photos:
+        if (collection && collection.photos) {
 
-            // Make a new request to update collection:
-            const updateCollectionRequest = collectionStore.put(collection);
+          // Filter the collection so that the corresponding id is removed:
+          collection.photos = collection.photos.filter((photo: Photo) => photo.id !== photoId);
 
-            updateCollectionRequest.onsuccess = (event: any) => {
-              console.log("[DAL] Success: RemovePhotoFromCollection Request Accepted.");
+          // Update the collection inside DB:
+          const updateRequest = collectionStore.put(collection, collectionId);
 
-            }
+          // Handle outcomes:
+          updateRequest.onsuccess = (updateEvent: any) => {
+            alert("[DAL] Success: RemovePhotoFromCollection Request Accepted.");
+            resolve(updateEvent.target.result);
+          };
 
-            updateCollectionRequest.onerror = (event: any) => {
-              console.log("[DAL] Fail: RemovePhotoFromCollection Request Denied: " + event);
-              reject(event.target.error);
-            }
-
-          }else{
-            console.log("[DAL] Fail: Collection has no Photos: " + event);
-            reject("Collection has no photos");
-          }
-        }else{
-          console.log("[DAL] Fail: Error Retrieving Collection: " + event);
-          reject("Collection not Found.");
+          updateRequest.onerror = (updateEvent: any) => {
+            alert("[DAL] Fail: RemovePhotoFromCollection Request Denied: " + updateEvent);
+            reject(updateEvent.target.error);
+          };
+        } else {
+          alert("[DAL] Fail: Collection not Found or has no Photos");
+          reject("Collection not found or has no photos");
         }
       };
 
-      request.onerror = (event: any) => {
+      getRequest.onerror = (event: any) => {
         console.log("[DAL] Fail: Failed to Retrieve Collection: " + event);
         reject(event.target.error);
-      }
-    })
+      };
+    });
   }
+
 
   // *****************************
   // Tags Crud Operations
