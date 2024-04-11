@@ -43,7 +43,9 @@ export class ModifyphotopageComponent implements OnInit{
         .then( (data) => {
           alert("Photo Retrieved Successfully.");
 
+          // Assign data to photo:
           this.photo = data;
+
           // Apply data to the fields inside the form:
           this.modifyPhotoForm.get('_photoNameModify')?.setValue(this.photo.name);
           this.modifyPhotoForm.get('_modifyDateCaptured')?.setValue(this.photo.dateCaptured);
