@@ -25,7 +25,8 @@ export class ModifyphotopageComponent implements OnInit{
 
   // Initialize params to hold selected PhotoID:
   photo: any;
-  imgSrc: any;
+  id: any;
+  dataURL: any;
 
   // Get data from ActivatedRoute and Initialize a Router (to return back to photoList)
   constructor(private route: ActivatedRoute, private router: Router) { }
@@ -35,16 +36,19 @@ export class ModifyphotopageComponent implements OnInit{
     this.route.queryParams.subscribe( (data) => {
 
       // Get id from activated route:
-      const id = +data['id'];
+       this.id = +data['id'];
 
       // Get photo data from DAL:
       this.photo = this.dal_service
-        .selectPhoto(id)
+        .selectPhoto(this.id)
         .then( (data) => {
           alert("Photo Retrieved Successfully.");
 
           // Assign data to photo:
           this.photo = data;
+
+          // Assign DataURL to global variable (needed for saving):
+          this.dataURL = data.dataURL;
 
           // Apply data to the fields inside the form:
           this.modifyPhotoForm.get('_photoNameModify')?.setValue(this.photo.name);
@@ -108,11 +112,16 @@ export class ModifyphotopageComponent implements OnInit{
       const favouritePhoto = this.modifyPhotoForm.value._modifyFavouritePhoto!;
       const hidePhoto = this.modifyPhotoForm.value._modifyHidePhoto!;
 
-      const photo = new Photo(photoName, "", dateCaptured, dateAdded,
-        [photoTag], favouritePhoto, hidePhoto, photoTagId)
+      const photo = new Photo(photoName, this.dataURL, dateCaptured, dateAdded,
+        [photoTag], favouritePhoto, hidePhoto, photoTagId);
 
-      this.dal_service.insertPhoto(photo).then((data) => {
+      // Update the photo id to match the passed id:
+      photo.id = this.id;
+
+      this.dal_service.updatePhoto(photo).then((data) => {
         alert("Photo added successfully");
+        // Navigate back to photolist:
+        this.router.navigate(["/photo"]);
       }).catch((e) => {
         alert("Photo add failed " + e.message);
       });
@@ -135,8 +144,7 @@ export class ModifyphotopageComponent implements OnInit{
           alert("An Error Occurred When Inserting the Photo: " + e.message)
         })
 
-      // Navigate back to photolist:
-      this.router.navigate(["/photo"]);
+
     }
   }
 }

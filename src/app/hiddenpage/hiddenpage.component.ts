@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {DALService} from "../../../services/DAL-service";
 import {RouterLink} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 
 
 @Component({
@@ -9,7 +9,8 @@ import {NgForOf} from "@angular/common";
   standalone: true,
   imports: [
     RouterLink,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './hiddenpage.component.html',
   styleUrl: './hiddenpage.component.css'
@@ -20,6 +21,7 @@ export class HiddenpageComponent {
   sortData: string[] = ["A - Z", "Added", "Rating", "Favourite"];
   sortInt: number = 0;
   sortString: string = this.sortData[1]
+  photos: any[] = [];
 
   loadPhoto = inject(DALService)
 
@@ -29,6 +31,7 @@ export class HiddenpageComponent {
 
   ngOnInit(): void {
 
+    // CHECK PASSWORD:
     if (localStorage.getItem("Password") === null) {
       alert("Please set a Password in Settings Before Using this Page!");
     }
@@ -39,7 +42,7 @@ export class HiddenpageComponent {
         this.loadPhotos();
       }
       else{
-        const cardGroup: any = document.getElementById('card-group');
+        const cardGroup: any = document.getElementById('deny');
         cardGroup.innerHTML += `<p>No Password, No Access. 😈</p>`
       }
     }
@@ -64,35 +67,14 @@ export class HiddenpageComponent {
     console.log("LOAD PHOTOS CALLED");
     this.loadPhoto.selectAllPhotos().then((data) => {
 
-      // Get card group:
-      const cardGroup = document.getElementById('card-group');
+      this.photos = [];
 
-      let htmlCode = ""
-
-      if (data.length === 0) {
-        htmlCode += `<p>No Hidden Photos 😭</p>`
-      } else {
-        for (let i = 0; i < data.length; i++) {
-          const card = data [i]
-
-          // CHECK IF THE PHOTO HAS HIDDEN ATTRIBUTE:
-          if(card.hidden){
-            // Create new image and assign it the saved dataUrl:
-            const img = new Image();
-            img.src = card.imageDataUrl;
-
-            htmlCode += `<div class="card">
-                       <a [routerLink]="['/modifyPhoto', ${card.id}]">
-                         <img src="${img.src}" class="card-img-top" alt="Photo">
-                       </a>
-                     </div>`;
-          }
+      for (let i = 0; i < data.length; i++) {
+        // Only select hidden photos
+        if (data[i].hidden) {
+          this.photos.push(data[i]);
         }
       }
-
-      // @ts-ignore
-      cardGroup.innerHTML = htmlCode;
-
     }).catch((e) => {
       console.log(e.message)
     })
