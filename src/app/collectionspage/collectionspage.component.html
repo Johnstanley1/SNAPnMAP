@@ -9,42 +9,19 @@ Student ID: 8864315,
   <a class="btn btn-outline-info" routerLink="/addCollections" role="button">Add Collections</a>
 </div>
 
-<div class="m-3"></div>
+<div style="padding-bottom: 15px;"><!-- DIVIDER --></div>
+
 <div class="card-group">
-  <div class="card">
-    <a routerLink="/modifyCollections">
-      <img src="/assets/img/Me.jpg" class="card-img-top" alt="...">
-    </a>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+  <ng-container *ngIf="collections.length === 0; else collectionList">
+    <p>No Collections Inside Storage 😢</p>
+  </ng-container>
+  <ng-template #collectionList>
+    <div *ngFor="let collection of collections" class="card">
+      <a [routerLink]="'/modifyCollections'" [queryParams]="{id: collection.id}" role="button">
+        <img [src]="collection.thumbnailPhoto" class="card-img-top" alt="Collection Thumbnail">
+        <p>{{ collection.name }}</p>
+      </a>
     </div>
-    <div class="card-footer">
-      <small class="text-body-secondary">Collection 1</small>
-    </div>
-  </div>
-  <div class="m-3"></div>
-  <div class="card">
-    <a routerLink="/modifyCollections">
-      <img src="/assets/img/willPhoto.jfif" class="card-img-top" alt="...">
-    </a>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-    </div>
-    <div class="card-footer">
-      <small class="text-body-secondary">Collection 2</small>
-    </div>
-  </div>
-  <div class="m-3"></div>
-  <div class="card">
-    <a routerLink="/modifyCollections">
-      <img src="/assets/img/willPhoto.jfif" class="card-img-top" alt="...">
-    </a>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-    </div>
-    <div class="card-footer">
-      <small class="text-body-secondary">Collection 3</small>
-    </div>
-  </div>
+  </ng-template>
 </div>
 
