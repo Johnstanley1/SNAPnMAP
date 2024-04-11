@@ -134,6 +134,22 @@ export class ModifyphotopageComponent implements OnInit{
     }
   }
 
+  btnDelete_click(){
+        if(confirm("Are you Sure you want to Delete this Photo?")){
+          // Delete Photo from DB
+          this.dal_service
+            .deletePhoto(this.photo)
+            .then( () => {
+              alert("Photo Deleted. ☹");
+              // Route user back to photo list
+              this.router.navigate(["/photo"]);
+            })
+            .catch( (e) => {
+              alert("Failed to Delete Photo: " + e)
+            })
+        }
+  }
+
   btnModifyTags_click() {
     const tag = this.modifyPhotoForm.value._modifyPhotoTag!
     const photoTag = new Tag(tag)
