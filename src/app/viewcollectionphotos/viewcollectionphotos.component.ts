@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {DALService} from "../../../services/DAL-service";
 import {Collection, Photo} from "../../../services/model-service";
 import {NgForOf, NgIf} from "@angular/common";
@@ -9,7 +9,8 @@ import {NgForOf, NgIf} from "@angular/common";
   standalone: true,
   imports: [
     NgIf,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './viewcollectionphotos.component.html',
   styleUrl: './viewcollectionphotos.component.css'
@@ -36,8 +37,6 @@ export class ViewcollectionphotosComponent {
           this.collection = data;
           this.collectionPhotos = data.photos;
           this.collectionName = data.collectionName;
-
-
 
         })
         .catch( (e) => {

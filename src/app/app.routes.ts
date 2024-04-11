@@ -17,6 +17,7 @@ import {ErrorpageComponent} from "./errorpage/errorpage.component";
 import {ModifycollectionspageComponent} from "./modifycollectionspage/modifycollectionspage.component";
 import {ModifyphotopageComponent} from "./modifyphotopage/modifyphotopage.component";
 import {ViewcollectionphotosComponent} from "./viewcollectionphotos/viewcollectionphotos.component";
+import {AddphototocollectionpageComponent} from "./addphototocollectionpage/addphototocollectionpage.component";
 
 export const routes: Routes = [
   {path: "home", component: HomepageComponent},
@@ -30,6 +31,7 @@ export const routes: Routes = [
   {path: "addCollections", component: AddcollectionspageComponent},
   {path: "modifyCollections", component: ModifycollectionspageComponent},
   {path: "viewCollectionPhotos", component: ViewcollectionphotosComponent},
+  {path: "addphototocollection", component: AddphototocollectionpageComponent},
   {path: "error", component: ErrorpageComponent},
   {path: "", redirectTo: "/home", pathMatch: "full"},
   {path: "*", component: ErrorpageComponent}

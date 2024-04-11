@@ -1,0 +1,69 @@
+<!--
+Programming Mobile Apps
+Authors: Johnstanley Ajagu,
+         Will Smith
+Student ID: 8864315,
+            88*****
+-->
+
+<div class="m-4">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2>Add Photo</h2>
+    </div>
+    <div class="text-center m-3">
+      <app-camera></app-camera>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="photoForm">
+        <div class="mb-3">
+          <label for="photoName">Photo Name</label>
+          <input id="photoName" type="text" class="form-control" formControlName="_photoName">
+
+          @if (refName.invalid && (refName.touched || refName.dirty)){
+            @if(refName.errors?.['required']){
+              <small class="text-danger">Name is required</small><br>
+            }
+            @if(refName.errors?.['minlength']){
+              <small class="text-danger">Name must be at least {{Min_Length}} char long</small><br>
+            }
+            @if(refName.errors?.['maxlength']){
+              <small class="text-danger">Name must be at most {{Max_length}} char long</small><br>
+            }
+          }
+
+        </div>
+        <div class="mb-3">
+          <label for="dateCaptured">Date Captured</label>
+          <input id="dateCaptured" type="date" class="form-control" formControlName="_dateCaptured">
+
+          @if (refDateCaptured.invalid && (refDateCaptured.touched || refDateCaptured.dirty)){
+            @if(refDateCaptured.errors?.['required']){
+              <small class="text-danger">Captured date is required</small><br>
+            }
+          }
+
+        </div>
+        <div class="mb-3">
+          <label for="dateAdded">Date Added</label>
+          <input id="dateAdded" type="date" class="form-control" formControlName="_dateAdded">
+
+          @if (refDateAdded.invalid && (refDateAdded.touched || refDateAdded.dirty)){
+            @if(refDateAdded.errors?.['required']){
+              <small class="text-danger">Added date is required</small><br>
+            }
+          }
+        </div>
+
+        <div class="text-center m-3">
+          <app-maplocation></app-maplocation>
+        </div>
+        <div class="text-center d-grid gap-2 m-3 col-3 mx-auto">
+          <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnAdd_click()">Add Photo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
