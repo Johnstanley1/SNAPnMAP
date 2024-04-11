@@ -11,10 +11,15 @@ Student ID: 8864315,
   <a id="sortBtn" class="btn btn-outline-info" role="combobox" (click)="changeSortValue_click()">Sort: {{ sortString }}</a>
 </div>
 <div style="padding-bottom: 15px;"><!-- DIVIDER--></div>
-<div class="card-group" id="card-group" >
-  <a routerLink="/modifyPhoto" role="button" class="btn btn-outline-info">
-    <img src="/assets/img/map.jpeg" alt="">
-    <p>Photo name</p>
-  </a>
-</div>
+<ng-container *ngIf="photos.length === 0; else photoList">
+  <p>No Photos Inside Storage 😭</p>
+</ng-container>
+<ng-template #photoList>
+  <div *ngFor="let card of photos" class="card">
+    <a [routerLink]="'/modifyPhoto'" [queryParams]="{id: card.id}" role="button">
+      <img [src]="card.imageDataUrl" class="card-img-top" alt="photo">
+      <p>{{card.name}}</p>
+    </a>
+  </div>
+</ng-template>
 

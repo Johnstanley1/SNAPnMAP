@@ -11,14 +11,14 @@ Student ID: 8864315,
     <div class="card-header text-center">
       <h2>Modify Photo</h2>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="photo">
       <div class="text-center m-3">
-        <img [src]="imgSrc" width="80%" alt="Image placeholder">
+        <img [src]="photo.imageDataUrl" width="80%" alt="Image placeholder">
       </div>
       <form [formGroup]="modifyPhotoForm">
         <div class="mb-3">
           <label for="photoNameModify">Photo Name</label>
-          <input id="photoNameModify" type="text" class="form-control" formControlName="_photoNameModify" [(ngModel)]="photo.name">
+          <input id="photoNameModify" type="text" class="form-control" formControlName="_photoNameModify">
 
           @if (refModifyName.invalid && (refModifyName.touched || refModifyName.dirty)){
             @if(refModifyName.errors?.['required']){

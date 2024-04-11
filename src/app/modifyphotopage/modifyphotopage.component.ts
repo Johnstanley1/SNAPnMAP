@@ -1,6 +1,6 @@
 import {Component, inject, OnInit } from '@angular/core';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {JsonPipe} from "@angular/common";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {JsonPipe, NgIf} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {isEmpty} from "rxjs";
@@ -15,7 +15,8 @@ import { ActivatedRoute, Router } from "@angular/router";
     FormsModule,
     JsonPipe,
     ReactiveFormsModule,
-    MaplocationComponent
+    MaplocationComponent,
+    NgIf
   ],
   templateUrl: './modifyphotopage.component.html',
   styleUrl: './modifyphotopage.component.css'
@@ -23,31 +24,38 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class ModifyphotopageComponent implements OnInit{
 
   // Initialize params to hold selected PhotoID:
-  photoId: number = -1;
   photo: any;
-  imgSrc: any
+  imgSrc: any;
 
   // Get data from ActivatedRoute and Initialize a Router (to return back to photoList)
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     // Get ID passed by ActivatedRoute:
-    this.route.params.subscribe( (data) => {
-      // Convert saved ID to number
-      this.photoId = +data['id'];
+    this.route.queryParams.subscribe( (data) => {
+
+      // Get id from activated route:
+      const id = +data['id'];
 
       // Get photo data from DAL:
       this.photo = this.dal_service
-        .selectPhoto(this.photoId)
+        .selectPhoto(id)
         .then( (data) => {
-          console.log("Photo Retrieved Successfully.");
+          alert("Photo Retrieved Successfully.");
+
+          this.photo = data;
+          // Apply data to the fields inside the form:
+          this.modifyPhotoForm.get('_photoNameModify')?.setValue(this.photo.name);
+          this.modifyPhotoForm.get('_modifyDateCaptured')?.setValue(this.photo.dateCaptured);
+          this.modifyPhotoForm.get('_modifyDateAdded')?.setValue(this.photo.dateAdded);
+          this.modifyPhotoForm.get('_modifyPhotoTag')?.setValue(this.photo.tag);
+          this.modifyPhotoForm.get('_modifyFavouritePhoto')?.setValue(this.photo.favourite);
+          this.modifyPhotoForm.get('_modifyHidePhoto')?.setValue(this.photo.hidden);
+
         })
         .catch( (e) => {
           alert("Failed to Retrieve Photo Data: " + e);
         });
-
-      // Apply dataURL to the image source's src variable:
-      this.imgSrc.src = this.photo.imageDataUrl;
     });
   };
 

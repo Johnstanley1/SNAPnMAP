@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink, Router} from "@angular/router";
 import {DALService} from "../../../services/DAL-service";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
 
 @Component({
@@ -9,7 +9,8 @@ import {MaplocationComponent} from "../maplocation/maplocation.component";
   standalone: true,
   imports: [
     RouterLink,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './photopage.component.html',
   styleUrl: './photopage.component.css'
@@ -18,6 +19,7 @@ export class PhotopageComponent implements OnInit{
   sortData: string[] = ["A - Z", "Added", "Rating", "Favourite"];
   sortInt: number = 0;
   sortString: string = this.sortData[1]
+  photos: any[] = [];
 
   loadPhoto = inject(DALService)
 
@@ -47,39 +49,49 @@ export class PhotopageComponent implements OnInit{
 
   loadPhotos() {
     console.log("LOAD PHOTOS CALLED");
+
+
     this.loadPhoto.selectAllPhotos().then((data) => {
+      // Clear existing photos before pushing new ones (optional, depends on your requirements)
+      this.photos = [];
 
-      // Get card group:
-      let cardGroup = document.getElementById('card-group')!;
-
-      let htmlCode = ""
-
-      if (data.length === 0) {
-        htmlCode += `<p>No Photos Inside Storage 😭</p>`
-      } else {
-        for (let i = 0; i < data.length; i++) {
-          const card = data [i]
-
-          // CHECK IF THE PHOTO HAS HIDDEN ATTRIBUTE:
-          if(!card.hidden){
-            // Create new image and assign it the saved dataUrl:
-            const img = new Image();
-            //img.src = card.imageDataUrl;
-
-            htmlCode += `<div class="card">
-                       <a href="/modifyPhoto" data-row-id="${card.id}" role="button">
-                         <img src="${card.imageDataUrl}" class="card-img-top" alt="Photo">
-                         <p>Testing if this works</p>
-                       </a>
-                     </div>`;
-          }
+      for (let i = 0; i < data.length; i++) {
+        if (!data[i].hidden) {
+          this.photos.push(data[i]);
         }
       }
+    });
 
-      cardGroup.innerHTML = htmlCode;
 
-    }).catch((e) => {
-      console.log(e.message)
-    })
-  };
+      // // Get card group:
+      // let cardGroup = document.getElementById('card-group')!;
+      //
+      // let htmlCode = ""
+      //
+      // if (data.length === 0) {
+      //   htmlCode += `<p>No Photos Inside Storage 😭</p>`
+      // } else {
+      //   for (let i = 0; i < data.length; i++) {
+      //     const card = data [i]
+      //
+      //     // CHECK IF THE PHOTO HAS HIDDEN ATTRIBUTE:
+      //     if(!card.hidden){
+      //       // Create new image and assign it the saved dataUrl:
+      //       const img = new Image();
+      //       //img.src = card.imageDataUrl;
+      //
+      //       htmlCode += `<div class="card">
+      //                  <a href="/modifyPhoto" data-row-id="${card.id}" role="button">
+      //                    <img src="${card.imageDataUrl}" class="card-img-top" alt="Photo">
+      //                    <p>${card.name}</p>
+      //                  </a>
+      //                </div>`;
+      //     }
+      //   }
+      // }
+      //
+      // cardGroup.innerHTML = htmlCode;
+
+
+  }
 }
