@@ -27,7 +27,7 @@ export class ModifycollectionspageComponent {
   // Initialize Variables:
   Min_Length = 5
   Max_length = 20
-  date = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19|20)\d{2}$/
+  //date = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19|20)\d{2}$/
   id: any;
   collection: any;
   dataUrl: any;
