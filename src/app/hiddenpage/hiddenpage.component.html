@@ -12,10 +12,10 @@ Student ID: 8864315,
     <p>No 'Hidden Photos' Inside Storage 😢</p>
   </ng-container>
   <ng-template #photoList>
-    <div *ngFor="let card of photos" class="card">
+    <div *ngFor="let card of photos" class="card text-center">
       <a [routerLink]="'/modifyPhoto'" [queryParams]="{id: card.id}" role="button">
         <img [src]="card.imageDataUrl" class="card-img-top" alt="photo">
-        <p>{{card.name}}</p>
+        <p style="padding-top: 10px; margin-top: 10px;" class="card-text text-info-emphasis btn btn-outline-info mb-2">{{card.name}}</p>
       </a>
     </div>
   </ng-template>

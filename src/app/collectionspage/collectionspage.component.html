@@ -19,7 +19,7 @@ Student ID: 8864315,
     <div *ngFor="let collection of collections" class="card text-center">
       <a [routerLink]="'/modifyCollections'" [queryParams]="{id: collection.id}" class="text-decoration-none" role="button">
         <img [src]="collection.thumbnailPhoto" class="card-img-top" alt="Collection Thumbnail">
-        <p class="card-text text-info-emphasis btn btn-outline-info mb-2">{{ collection.name }}</p>
+        <p style="padding-top: 10px; margin-top: 10px;" class="card-text text-info-emphasis btn btn-outline-info mb-2">{{ collection.name }}</p>
       </a>
     </div>
   </ng-template>
