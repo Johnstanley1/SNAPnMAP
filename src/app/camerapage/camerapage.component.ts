@@ -133,13 +133,5 @@ export class CamerapageComponent {
   deleteTag(i: number) {
       this.tags.splice(i,1)
 
-      // const id = localStorage.getItem('tagId');
-      //
-      // this.dal_service.deleteTag(id).then((data)=>{
-      //   console.log(data)
-      // }).catch((e)=>{
-      //   console.log(e.message)
-      // })
-
   }
 }

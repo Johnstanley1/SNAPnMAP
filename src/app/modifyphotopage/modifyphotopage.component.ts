@@ -1,6 +1,6 @@
 import {Component, inject, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {JsonPipe, NgIf} from "@angular/common";
+import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
@@ -15,7 +15,8 @@ import { ActivatedRoute, Router } from "@angular/router";
     JsonPipe,
     ReactiveFormsModule,
     MaplocationComponent,
-    NgIf
+    NgIf,
+    NgForOf
   ],
   templateUrl: './modifyphotopage.component.html',
   styleUrl: './modifyphotopage.component.css'
@@ -26,6 +27,7 @@ export class ModifyphotopageComponent implements OnInit{
   photo: any;
   id: any;
   dataURL: any;
+  tags: string[] = []
 
   // Get data from ActivatedRoute and Initialize a Router (to return back to photoList)
   constructor(private route: ActivatedRoute, private router: Router) { }
@@ -49,7 +51,7 @@ export class ModifyphotopageComponent implements OnInit{
           this.modifyPhotoForm.get('_photoNameModify')?.setValue(this.photo.name);
           this.modifyPhotoForm.get('_modifyDateCaptured')?.setValue(this.photo.dateCaptured);
           this.modifyPhotoForm.get('_modifyDateAdded')?.setValue(this.photo.dateAdded);
-          this.modifyPhotoForm.get('_modifyPhotoTag')?.setValue(this.photo.tag);
+          this.modifyTagForm.get('_modifyTagName')?.setValue(this.photo.tag);
           this.modifyPhotoForm.get('_modifyFavouritePhoto')?.setValue(this.photo.favourite);
           this.modifyPhotoForm.get('_modifyHidePhoto')?.setValue(this.photo.hidden);
 
@@ -72,6 +74,13 @@ export class ModifyphotopageComponent implements OnInit{
   builder = inject(FormBuilder)
   dal_service = inject(DALService)
 
+  modifyTagForm = this.builder.group({
+    _modifyTagName: ["",
+      [Validators.required,
+        Validators.maxLength(this.Max_length)]
+    ],
+  })
+
   modifyPhotoForm = this.builder.group({
     _photoNameModify: ["",
       [Validators.required,
@@ -87,10 +96,6 @@ export class ModifyphotopageComponent implements OnInit{
       [Validators.required]
     ],
 
-    _modifyPhotoTag: ["",
-      [Validators.required]
-    ],
-
     _modifyFavouritePhoto: [false],
     _modifyHidePhoto: [false]
 
@@ -99,7 +104,7 @@ export class ModifyphotopageComponent implements OnInit{
   refModifyName = this.modifyPhotoForm.controls['_photoNameModify']
   refModifiedDateCaptured = this.modifyPhotoForm.controls['_modifyDateCaptured']
   refModifyDateAdded = this.modifyPhotoForm.controls['_modifyDateAdded']
-  refModifyTag = this.modifyPhotoForm.controls['_modifyPhotoTag']
+  refModifyTag = this.modifyTagForm.controls['_modifyTagName']
 
 
   btnModify_click() {
@@ -108,13 +113,15 @@ export class ModifyphotopageComponent implements OnInit{
       const photoName = this.modifyPhotoForm.value._photoNameModify!;
       const dateCaptured = this.modifyPhotoForm.value._modifyDateCaptured!;
       const dateAdded = this.modifyPhotoForm.value._modifyDateAdded!;
-      const photoTag = this.modifyPhotoForm.value._modifyPhotoTag!;
-      //const photoTagId = parseInt(photoTag);
+
+      const tag: string[] = this.tags
+
+      //const photoTag = this.modifyTagForm.value._modifyTagName!;
       const favouritePhoto = this.modifyPhotoForm.value._modifyFavouritePhoto!;
       const hidePhoto = this.modifyPhotoForm.value._modifyHidePhoto!;
 
       const photo = new Photo(photoName, this.dataURL, dateCaptured, dateAdded,
-        [photoTag], favouritePhoto, hidePhoto);
+        tag, favouritePhoto, hidePhoto);
 
       // Update the photo id to match the passed id:
       photo.id = this.id;
@@ -148,20 +155,24 @@ export class ModifyphotopageComponent implements OnInit{
   }
 
   btnModifyTags_click() {
-    const tag = this.modifyPhotoForm.value._modifyPhotoTag!
+    const tag = this.modifyTagForm.value._modifyTagName!
     const photoTag = new Tag(tag)
-    if (tag == null){
+    if (this.modifyTagForm.invalid){
       console.log("Please add tags")
     }else{
       this.dal_service
         .insertTag(photoTag)
         .then((data)=>{
+          this.tags.push(tag)
           console.log("Tag added successfully " + data); })
         .catch((e)=>{
           alert("An Error Occurred When Inserting the Photo: " + e.message)
         })
-
-
     }
+  }
+
+  deleteTag(i: number) {
+    this.tags.splice(i,1)
+
   }
 }
