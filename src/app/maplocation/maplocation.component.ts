@@ -66,7 +66,7 @@ export class MaplocationComponent {
       options
     );
 
-    var icon = new H.map.Icon('assets/img/marker.png');
+    var icon = new H.map.Icon('assets/icons/mark.png');
     var marker = new H.map.Marker({
       lat: this.lat, lng: this.lon
     }, {icon: icon});
