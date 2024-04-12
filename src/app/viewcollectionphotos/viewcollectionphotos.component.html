@@ -9,7 +9,7 @@
   </ng-container>
   <ng-template #photos>
     <div *ngFor="let photo of collectionPhotos" class="card">
-      <p class="card-text">{{photo.name}}</p>
+      <p class="card-text m-3 text-info-emphasis">{{photo.name}}</p>
       <img [src]="photo.imageDataUrl" class="card-img" alt="Collection Photo">
       <div class="card-footer">
         <button class="btn btn-outline-danger container-fluid" (click)="btnDelete_click(photo)">Delete</button>
