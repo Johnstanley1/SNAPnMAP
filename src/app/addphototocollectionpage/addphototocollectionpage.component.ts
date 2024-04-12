@@ -23,6 +23,8 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 })
 export class AddphototocollectionpageComponent {
 
+  mapLocation = new MaplocationComponent()
+
   // Define variable to store id:
   id: any;
 
@@ -71,6 +73,8 @@ export class AddphototocollectionpageComponent {
       const photoName = this.photoForm.value._photoName!;
       const dateCaptured = this.photoForm.value._dateCaptured!;
       const dateAdded = this.photoForm.value._dateAdded!;
+      const lat = this.mapLocation.getLat();
+      const lon = this.mapLocation.getLon();
 
       // Before creating photo, we need to get the image passed, and convert it to DataURL
       const image: any = document.getElementById('imageSource');
@@ -91,7 +95,7 @@ export class AddphototocollectionpageComponent {
       console.log("Data Url: " + dataUrl );
 
       const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
-        [], false, false)
+        [], false, false, lon, lat)
 
       this.dal_service.addPhotoToCollection(this.id, photo).then((data) => {
         alert("Photo added to Collection Successfully.");

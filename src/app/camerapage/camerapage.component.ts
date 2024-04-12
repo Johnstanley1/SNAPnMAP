@@ -35,6 +35,8 @@ export class CamerapageComponent {
 
   dal_service = inject(DALService)
 
+  mapLocation = new MaplocationComponent()
+
   tagForm = this.builder.group({
     _tagName: ["",
       [Validators.required,
@@ -77,6 +79,10 @@ export class CamerapageComponent {
       const dateAdded = this.photoForm.value._dateAdded!;
       const favouritePhoto = this.photoForm.value._favouritePhoto!;
       const hidePhoto = this.photoForm.value._hidePhoto!;
+      const lat = this.mapLocation.getLat();
+      const lon = this.mapLocation.getLon();
+
+      console.log(lon, lat)
 
       // Before creating photo, we need to get the image passed, and convert it to DataURL
       const image: any = document.getElementById('imageSource');
@@ -97,7 +103,7 @@ export class CamerapageComponent {
       console.log("Data Url: " + dataUrl);
 
       const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
-        tag, favouritePhoto, hidePhoto)
+        tag, favouritePhoto, hidePhoto, lon, lat)
 
       this.dal_service.insertPhoto(photo).then((data) => {
         alert("Photo added successfully: " + tag);

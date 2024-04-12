@@ -20,6 +20,9 @@ export class MaplocationComponent {
   lat: any;
   lon: any
 
+  constructor() {
+    this.getLocationOnclick()
+  }
   getLocationOnclick() {
     const subscription = this.geoService.getCurrentLocation().then(data => {
       console.log(data);
@@ -71,4 +74,13 @@ export class MaplocationComponent {
     // Add the marker to the map and center the map at the location of the marker:
     map.addObject(marker);
   }
+
+  getLat(): any {
+    return this.lat;
+  }
+
+  getLon(): any {
+    return this.lon;
+  }
+
 }

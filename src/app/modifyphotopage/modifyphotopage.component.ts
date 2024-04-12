@@ -31,7 +31,7 @@ export class ModifyphotopageComponent implements OnInit{
 
   // Get data from ActivatedRoute and Initialize a Router (to return back to photoList)
   constructor(private route: ActivatedRoute, private router: Router) { }
-
+  mapLocation = new MaplocationComponent()
   ngOnInit() {
     // Get ID passed by ActivatedRoute:
     this.route.queryParams.subscribe( (data) => {
@@ -116,9 +116,11 @@ export class ModifyphotopageComponent implements OnInit{
       const tag: string[] = this.tags
       const favouritePhoto = this.modifyPhotoForm.value._modifyFavouritePhoto!;
       const hidePhoto = this.modifyPhotoForm.value._modifyHidePhoto!;
+      const lat = this.mapLocation.getLat();
+      const lon = this.mapLocation.getLon();
 
       const photo = new Photo(photoName, this.dataURL, dateCaptured, dateAdded,
-        tag, favouritePhoto, hidePhoto);
+        tag, favouritePhoto, hidePhoto, lon, lat);
 
       // Update the photo id to match the passed id:
       photo.id = this.id;
