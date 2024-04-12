@@ -16,10 +16,10 @@ Student ID: 8864315,
     <p>No Collections Inside Storage 😢</p>
   </ng-container>
   <ng-template #collectionList>
-    <div *ngFor="let collection of collections" class="card">
-      <a [routerLink]="'/modifyCollections'" [queryParams]="{id: collection.id}" role="button">
+    <div *ngFor="let collection of collections" class="card text-center">
+      <a [routerLink]="'/modifyCollections'" [queryParams]="{id: collection.id}" class="text-decoration-none" role="button">
         <img [src]="collection.thumbnailPhoto" class="card-img-top" alt="Collection Thumbnail">
-        <p>{{ collection.name }}</p>
+        <p class="card-text text-info-emphasis btn btn-outline-info mb-2">{{ collection.name }}</p>
       </a>
     </div>
   </ng-template>

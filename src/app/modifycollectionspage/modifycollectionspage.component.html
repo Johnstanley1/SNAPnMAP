@@ -11,7 +11,7 @@ Student ID: 8864315,
       <h2>Modify Collection</h2>
       <div style="padding-bottom: 5px"></div>
         <a [routerLink]="'/viewCollectionPhotos'" [queryParams]="{id: collection.id}"
-           class="btn btn-outline-info" role="button">View Photo List</a>
+           class="btn btn-outline-info" role="button">View Collection Photos</a>
     </div>
     <div class="card-body" *ngIf="collection">
       <div class="text-center m-3">
@@ -58,7 +58,7 @@ Student ID: 8864315,
 
         </div>
 
-        <div class="text-center m-3 col-6 mx-auto">
+        <div class="text-center m-3 mx-auto">
           <button class="btn btn-outline-info container-fluid" (click)="btnUpdate_click()">Update</button>
           <div style="padding-bottom: 5px"></div>
           <button class="btn btn-outline-danger container-fluid" (click)="btnDelete_click()">Delete</button>
