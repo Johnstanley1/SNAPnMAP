@@ -74,7 +74,7 @@ export class PhotopageComponent implements OnInit{
     const comparePhotoData = (a: any, b: any): number => {
       // Check sort value:
       if (this.sortInt === 0) { // 0 = a - z ordering:
-        if (a.name < b.name) return -1;
+        if (a.name < b.name) return -1; // THIS ALSO TAKES CAPITALIZATION INTO ACCOUNT (A-Z will always be before a-z)
         if (a.name > b.name) return 1;
         return 0;
       } else if (this.sortInt === 1) { // 1 = Date Added
