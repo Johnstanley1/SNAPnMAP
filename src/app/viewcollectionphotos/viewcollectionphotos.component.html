@@ -8,11 +8,11 @@
     <p>No Photos Inside Collection 😭</p>
   </ng-container>
   <ng-template #photos>
-    <div *ngFor="let photo of collectionPhotos" class="card">
+    <div *ngFor="let photo of collectionPhotos; let i = index" class="card">
       <p class="card-text">{{photo.name}}</p>
       <img [src]="photo.imageDataUrl" class="card-img" alt="Collection Photo">
       <div class="card-footer">
-        <button class="btn btn-outline-danger container-fluid" (click)="btnDelete_click(photo)">Delete</button>
+        <button class="btn btn-outline-danger container-fluid" (click)="btnDelete_click(i)">Delete</button>
       </div>
     </div>
   </ng-template>

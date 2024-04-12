@@ -478,12 +478,10 @@ export class DALService {
         const collection = event.target.result;
 
         // Check if event is a collection
-        if(collection){
-          // Check if the list of photos is initialized:
+        if(collection && collection.photos){
 
-          // Add photo to collection photo array:
-          collection.photos = collection.photos.filter((photo: Photo) => photo.id !== photoId);
-          const photo = collection.photos.find((photo: Photo) => photo.id === photoId);
+          // Remove photo from collection photo array:
+          collection.photos.splice(photoId, 1);
 
           // Make a new request and update collection:
           const updateCollectionRequest = collectionStore.put(collection);
