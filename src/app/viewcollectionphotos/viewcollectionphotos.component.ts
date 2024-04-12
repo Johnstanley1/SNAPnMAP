@@ -45,7 +45,7 @@ export class ViewcollectionphotosComponent {
     })
   }
 
-  btnDelete_click(photo: Photo){
+  btnDelete_click(photo: any){
 
     if(confirm("Are you sure you want to delete this photo?")){
       const photoId : any = photo.id
