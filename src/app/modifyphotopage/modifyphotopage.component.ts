@@ -51,7 +51,7 @@ export class ModifyphotopageComponent implements OnInit{
           this.modifyPhotoForm.get('_photoNameModify')?.setValue(this.photo.name);
           this.modifyPhotoForm.get('_modifyDateCaptured')?.setValue(this.photo.dateCaptured);
           this.modifyPhotoForm.get('_modifyDateAdded')?.setValue(this.photo.dateAdded);
-          this.modifyTagForm.get('_modifyTagName')?.setValue(this.photo.tag);
+          this.modifyTagForm.get('_modifyTagName')?.setValue(this.photo.tags);
           this.modifyPhotoForm.get('_modifyFavouritePhoto')?.setValue(this.photo.favourite);
           this.modifyPhotoForm.get('_modifyHidePhoto')?.setValue(this.photo.hidden);
 
@@ -113,10 +113,7 @@ export class ModifyphotopageComponent implements OnInit{
       const photoName = this.modifyPhotoForm.value._photoNameModify!;
       const dateCaptured = this.modifyPhotoForm.value._modifyDateCaptured!;
       const dateAdded = this.modifyPhotoForm.value._modifyDateAdded!;
-
       const tag: string[] = this.tags
-
-      //const photoTag = this.modifyTagForm.value._modifyTagName!;
       const favouritePhoto = this.modifyPhotoForm.value._modifyFavouritePhoto!;
       const hidePhoto = this.modifyPhotoForm.value._modifyHidePhoto!;
 
