@@ -28,7 +28,7 @@ export class PhotopageComponent implements OnInit{
 
   photos: any[] = [];
   isFavourite: boolean = false;
-  favouriteString: string = "Show All";
+  favouriteString: string = "Showing All";
 
   loadPhoto = inject(DALService)
 
@@ -147,9 +147,9 @@ export class PhotopageComponent implements OnInit{
   toggleFavourite(){
     this.isFavourite = !this.isFavourite;
     if(this.isFavourite){
-      this.favouriteString = "Show All"
+      this.favouriteString = "Showing Favourites"
     }else{
-      this.favouriteString = "Show Favourites"
+      this.favouriteString = "Showing All"
     }
     this.loadPhotos();
   }
