@@ -1,0 +1,11 @@
+.card-group{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.card-group img {
+  max-width: 100%;
+  height: auto;
+
+}
