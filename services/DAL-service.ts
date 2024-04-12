@@ -456,50 +456,62 @@ export class DALService {
   removePhotoFromCollection(collectionId: number, photoId: number): Promise<any> {
 
     // Return new promise
-    return new Promise((resolve, reject) => {
+    return new Promise( (resolve, reject) => {
 
-      // Create transaction and assign a collectionStore
+      // Get transaction table
       const transaction = this.database.db.transaction(["collections"], "readwrite");
-      const collectionStore = transaction.objectStore("collections");
-
-      // Get the collection from the passed ID
-      const getRequest = collectionStore.get(collectionId);
 
       // Handle outcomes:
-      getRequest.onsuccess = (event: any) => {
-        // Assign the collection to the event result:
+      transaction.oncomplete = (event: any) => {
+        console.log("[DAL] Success: Transaction.");
+      };
+      transaction.onerror = (event: any) => {
+        console.log("[DAL] Fail: Transaction: " + event);
+      };
+
+      // Create store and get the collection via ID:
+      const collectionStore = transaction.objectStore("collections");
+      const request = collectionStore.get(collectionId);
+
+      request.onsuccess = (event: any) => {
+        // Create new collection using the event passed:
         const collection = event.target.result;
 
-        // Check if the collection has an initialized array of photos:
-        if (collection && collection.photos) {
+        // Check if event is a collection
+        if(collection){
+          // Check if the list of photos is initialized:
 
-          // Filter the collection so that the corresponding id is removed:
+          alert("Passed ID: " + photoId )
+          // Add photo to collection photo array:
           collection.photos = collection.photos.filter((photo: Photo) => photo.id !== photoId);
+          const photo = collection.photos.find((photo: Photo) => photo.id === photoId);
+          alert("Found Id:" + photo);
 
-          // Update the collection inside DB:
-          const updateRequest = collectionStore.put(collection, collectionId);
+          // Make a new request and update collection:
+          const updateCollectionRequest = collectionStore.put(collection);
 
-          // Handle outcomes:
-          updateRequest.onsuccess = (updateEvent: any) => {
-            alert("[DAL] Success: RemovePhotoFromCollection Request Accepted.");
-            resolve(updateEvent.target.result);
+          updateCollectionRequest.onsuccess = (event: any) => {
+            console.log("[DAL] Success: Photo Removed From Collection.");
+            resolve(event.target.result);
           };
 
-          updateRequest.onerror = (updateEvent: any) => {
-            alert("[DAL] Fail: RemovePhotoFromCollection Request Denied: " + updateEvent);
-            reject(updateEvent.target.error);
+          updateCollectionRequest.onerror = (event: any) => {
+            console.log("[DAL] Fail: Failed to Remove Photo from Collection: " + event);
+            // Reject promise:
+            reject(updateCollectionRequest.target.error);
           };
-        } else {
-          alert("[DAL] Fail: Collection not Found or has no Photos");
-          reject("Collection not found or has no photos");
+        }else{
+          console.log("[DAL] Fail: No Corresponding ID Found in DB: " + collectionId);
+          reject("No Collection Found.");
         }
       };
 
-      getRequest.onerror = (event: any) => {
-        console.log("[DAL] Fail: Failed to Retrieve Collection: " + event);
+      request.onerror = (event: any) => {
+        console.log("[DAL] Fail: Failed to Retrieve Collection: " + event.target.error);
         reject(event.target.error);
       };
-    });
+
+    })
   }
 
 

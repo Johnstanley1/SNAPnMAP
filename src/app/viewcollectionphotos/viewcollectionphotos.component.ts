@@ -45,14 +45,11 @@ export class ViewcollectionphotosComponent {
     })
   }
 
-  btnAddPhoto_click(){
-    alert("Add Photo Clicked");
-  }
-
-  btnDelete_click(id: any){
+  btnDelete_click(photo: Photo){
 
     if(confirm("Are you sure you want to delete this photo?")){
-      const photoId: number = parseInt(id);
+      const photoId : any = photo.id
+      alert(photoId);
       this.dal_service
         .removePhotoFromCollection(this.collection.id, photoId)
         .then( (data) => {
@@ -62,7 +59,5 @@ export class ViewcollectionphotosComponent {
           alert("Failed to Delete Photo: " + e);
         })
     }
-
   }
-
 }
