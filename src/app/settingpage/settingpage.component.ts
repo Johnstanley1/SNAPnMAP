@@ -125,4 +125,14 @@ export class SettingpageComponent {
       }
     }
   }
+
+  btnDeleteTag_click() {
+    if (confirm("Sure to clear all tags?")){
+      this.dal_service.deleteAllTags().then((data)=>{
+        alert("tag removed " +  data)
+      }).catch((e)=>{
+        console.log(e.message)
+      })
+    }
+  }
 }

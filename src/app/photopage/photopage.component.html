@@ -12,7 +12,7 @@ Student ID: 8864315,
 </div>
 <div style="padding-bottom: 15px;"><!-- DIVIDER--></div>
 <div class="card-group">
-  <ng-container *ngIf="photos.length === 0; else photoList">
+  <ng-container *ngIf="photos.length === 0; else photoList" class="col-6">
     <p>No Photos Inside Storage 😭</p>
   </ng-container>
   <ng-template #photoList>

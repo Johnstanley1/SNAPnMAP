@@ -55,19 +55,48 @@ Student ID: 8864315,
           }
 
         </div>
-        <div class="mb-3">
-          <label for="modifyPhotoTag">Tag</label>
-          <input id="modifyPhotoTag" class="form-control" formControlName="_modifyPhotoTag">
-          <div class="text-center m-3 col-3">
-            <button type="button" class="btn btn-outline-info container-fluid" (click)="btnModifyTags_click()">Add Tags</button>
-          </div>
-          @if (refModifyTag.invalid && (refModifyTag.touched || refModifyTag.dirty)){
-            @if(refModifyTag.errors?.['required']){
-              <small class="text-danger">Tag is required</small><br>
-            }
-          }
+<!--        <div class="mb-3">-->
+<!--          <label for="modifyPhotoTag">Tag</label>-->
+<!--          <input id="modifyPhotoTag" class="form-control" formControlName="_modifyPhotoTag">-->
+<!--          <div class="text-center m-3 col-3">-->
+<!--            <button type="button" class="btn btn-outline-info container-fluid" (click)="btnModifyTags_click()">Add Tags</button>-->
+<!--          </div>-->
+<!--          @if (refModifyTag.invalid && (refModifyTag.touched || refModifyTag.dirty)){-->
+<!--            @if(refModifyTag.errors?.['required']){-->
+<!--              <small class="text-danger">Tag is required</small><br>-->
+<!--            }-->
+<!--          }-->
 
-        </div>
+<!--        </div>-->
+        <form [formGroup]="modifyTagForm">
+          <div class="mb-3">
+            <label for="tagName">Tag</label>
+            <input id="tagName" type="text" class="form-control" formControlName="_modifyTagName">
+            <div class="row">
+              <div class="col-3 mt-3">
+                <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnModifyTags_click()">Add Tag</button>
+              </div>
+            </div>
+            @if (refModifyTag.invalid && (refModifyTag.touched || refModifyTag.dirty)){
+              @if(refModifyTag.errors?.['required']){
+                <small class="text-danger">Please enter photo tag</small><br>
+              }
+              @if(refModifyTag.errors?.['maxlength']){
+                <small class="text-danger">Name must be at most {{Max_length}} char long</small><br>
+              }
+            }
+          </div>
+          <div class=" mb-1" *ngFor="let tag of tags; let i = index" >
+            <div class="row">
+              <div class="col">
+                <input type="text" class="col-4 form-control mb-1" value="{{tag}}" readonly>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-danger" (click)="deleteTag(i)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </form>
         <div class="mb-3">
           <div class="form-check form-switch form-check-reverse">
             <input class="form-check-input" type="checkbox" id="modifyFavouritePhoto" formControlName="_modifyFavouritePhoto">
@@ -78,12 +107,12 @@ Student ID: 8864315,
             <label class="form-check-label" for="modifyHidePhoto">Hide Photo</label>
           </div>
         </div>
-        <div class="text-center m-3 col-6 mx-auto d-grid gap-2">
-          <button class="btn btn-outline-info container-fluid" (click)="btnModify_click()">Update</button>
-          <button class="btn btn-outline-danger container-fluid" (click)="btnDelete_click()">Delete</button>
-        </div>
         <div class="text-center m-3">
           <app-maplocation></app-maplocation>
+        </div>
+        <div class="text-center m-3 col-3 mx-auto d-grid gap-2">
+          <button class="btn btn-outline-info container-fluid" (click)="btnModify_click()">Update</button>
+          <button class="btn btn-outline-danger container-fluid" (click)="btnDelete_click()">Delete</button>
         </div>
       </form>
     </div>

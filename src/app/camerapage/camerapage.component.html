@@ -63,9 +63,6 @@ Student ID: 8864315,
               <div class="col-3 mt-3">
                 <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnAddTag_click()">Add Tag</button>
               </div>
-              <div class="col-3 mt-3">
-                <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnDeleteTag_click()">Delete tag</button>
-              </div>
             </div>
             @if (refTag.invalid && (refTag.touched || refTag.dirty)){
               @if(refTag.errors?.['required']){
@@ -76,10 +73,17 @@ Student ID: 8864315,
               }
             }
           </div>
+          <div class=" mb-1" *ngFor="let tag of tags; let i = index" >
+            <div class="row">
+              <div class="col">
+                <input type="text" class="col-4 form-control mb-1" name="" value="{{tag}}" readonly>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-danger" (click)="deleteTag(i)">Delete</button>
+              </div>
+            </div>
+          </div>
         </form>
-        <div class=" col-4">
-          <small type="text" class="form-control mb-2" *ngFor="let tag of tags" readonly>{{tags}}</small>
-        </div>
 
 <!--        <div class="mb-3">-->
 <!--          <label for="photoTag">Tag</label>-->

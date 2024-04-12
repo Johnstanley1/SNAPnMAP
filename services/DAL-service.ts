@@ -553,9 +553,38 @@ export class DALService {
     });
   };
 
-  deleteTag(collection: Collection): Promise<any> {
+  deleteAllTags(): Promise<any> {
+
+    return new Promise( (resolve, reject) => {
+      const transaction = this.database.db.transaction(["tags"], "readwrite");
+
+      transaction.oncomplete = (event: any) => {
+        console.log("[DAL] Success: Transaction DeleteAll Initialization");
+      };
+      transaction.onerror = (event: any) => {
+        console.log("[DAL] Fail: Transaction DeleteAll Initialization: " + event);
+      };
+
+      const tagStore = transaction.objectStore("tags");
+      const request = tagStore.clear();
+
+      request.onsuccess = (event: any) => {
+        console.log("[DAL] Success: DeleteAll Request Accepted.");
+        resolve(event);
+      }
+
+      request.onerror = (event: any) => {
+        console.log("[DAL] Success: DeleteAll Request Denied: " + event);
+        reject(event);
+      }
+    })
+  }
+
+  // Called when 'delete' clicked
+  deleteTag(tag: Tag): Promise<any> {
+
     return new Promise((resolve, reject) => {
-      const transaction = this.database.db.transaction(["collections"], "readwrite");
+      const transaction = this.database.db.transaction(["tags"], "readwrite");
 
       transaction.oncomplete = (event: any) => {
         console.log("[DAL] Success: Transaction Delete Initialization");
@@ -564,10 +593,9 @@ export class DALService {
         console.log("[DAL] Fail: Transaction Delete Initialization: " + event);
       };
 
-      const collectionStore = transaction.objectStore("collections");
-
-      if (collection.id) {
-        const request = collectionStore.delete(collection.id);
+      const photoStore = transaction.objectStore("photos");
+      if (tag.id) {
+        const request = photoStore.delete(tag.id);
 
         request.onsuccess = (event: any) => {
           console.log("[DAL] Success: Delete Request Accepted.");
@@ -578,9 +606,10 @@ export class DALService {
           reject(event);
         };
       } else {
-        reject("Collection Does Not Posses An ID.")
+        reject("Photo Does Not Posses An ID.")
       }
 
     });
   }
+
 }
