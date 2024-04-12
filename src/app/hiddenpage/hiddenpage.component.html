@@ -8,8 +8,8 @@ Student ID: 8864315,
 <div style="padding-bottom: 15px;"><!-- DIVIDER--></div>
 <div id="deny"></div>
 <div class="card-group">
-  <ng-container *ngIf="photos.length === 0; else photoList">
-    <p>No Hidden Photos Inside Storage 😭</p>
+  <ng-container *ngIf="photos.length === 0 && passwordValid; else photoList">
+    <p>No 'Hidden Photos' Inside Storage 😢</p>
   </ng-container>
   <ng-template #photoList>
     <div *ngFor="let card of photos" class="card">

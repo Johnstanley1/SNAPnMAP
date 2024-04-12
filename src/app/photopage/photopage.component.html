@@ -9,6 +9,10 @@ Student ID: 8864315,
   <a class="btn btn-outline-info" routerLink="/camera" role="button">Add Photo</a>
 
   <a id="sortBtn" class="btn btn-outline-info" role="combobox" (click)="changeSortValue_click()">Sort: {{ sortString }}</a>
+
+  <button style="margin-left: 15px;" type="button" class="btn btn-outline-info" role="checkbox" [class.btn-primary]="isFavourite" [class.btn-outline-info]="!isFavourite" (click)="toggleFavourite()">
+    <span>Favourite</span>
+  </button>
 </div>
 <div style="padding-bottom: 15px;"><!-- DIVIDER--></div>
 <div class="card-group">
