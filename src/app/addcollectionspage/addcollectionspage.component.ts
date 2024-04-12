@@ -4,7 +4,7 @@ import {Collection} from "../../../services/model-service";
 import {JsonPipe} from "@angular/common";
 import {CameraComponent} from "../camera/camera.component";
 import {DALService} from "../../../services/DAL-service";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-addcollectionspage',
@@ -19,6 +19,9 @@ import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
   styleUrl: './addcollectionspage.component.css'
 })
 export class AddcollectionspageComponent {
+
+  constructor( private router: Router) { }
+
   Min_Length = 5
   Max_length = 20
   date = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19|20)\d{2}$/
@@ -82,6 +85,8 @@ export class AddcollectionspageComponent {
         .insertCollection(collection)
         .then( (data) => {
           alert("Collection Added Successfully");
+          // Route back to collections list page:
+          this.router.navigate(["/collections"]);
         })
         .catch( (e) => {
           alert("An Error Occurred Attempting to Insert Collection: " + e.message);

@@ -481,11 +481,9 @@ export class DALService {
         if(collection){
           // Check if the list of photos is initialized:
 
-          alert("Passed ID: " + photoId )
           // Add photo to collection photo array:
           collection.photos = collection.photos.filter((photo: Photo) => photo.id !== photoId);
           const photo = collection.photos.find((photo: Photo) => photo.id === photoId);
-          alert("Found Id:" + photo);
 
           // Make a new request and update collection:
           const updateCollectionRequest = collectionStore.put(collection);

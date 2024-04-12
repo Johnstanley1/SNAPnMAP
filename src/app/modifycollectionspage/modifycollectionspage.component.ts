@@ -111,6 +111,8 @@ export class ModifycollectionspageComponent {
         .updateCollection(collection)
         .then( () => {
           alert("Updated Collection.");
+          // Route back to main page:
+          this.router.navigate(["/collections"])
         })
         .catch( (e) => {
           alert("Failed to Update Collection: " + e);
@@ -126,6 +128,8 @@ export class ModifycollectionspageComponent {
         .deleteCollection(this.collection)
         .then( () => {
           alert("Collection Deleted. 😭");
+          // Route back to collection list
+          this.router.navigate(["/collections"])
         })
         .catch( (e) => {
           alert("Failed to Delete Collection: " + e);

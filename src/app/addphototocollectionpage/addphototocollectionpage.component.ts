@@ -28,7 +28,7 @@ export class AddphototocollectionpageComponent {
   // Define variable to store id:
   id: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(){
     this.route.queryParams.subscribe( (data) => {
@@ -99,6 +99,8 @@ export class AddphototocollectionpageComponent {
 
       this.dal_service.addPhotoToCollection(this.id, photo).then((data) => {
         alert("Photo added to Collection Successfully.");
+        // Route back to collectionPage:
+        this.router.navigate(["/collections"]);
       }).catch((e) => {
         alert("Photo add failed: " + e.message);
       });

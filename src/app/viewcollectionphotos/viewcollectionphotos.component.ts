@@ -22,7 +22,7 @@ export class ViewcollectionphotosComponent {
   collectionPhotos: Photo[] = [];
   collectionName: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(){
     this.route.queryParams.subscribe( (data) => {
@@ -49,11 +49,11 @@ export class ViewcollectionphotosComponent {
 
     if(confirm("Are you sure you want to delete this photo?")){
       const photoId : any = photo.id
-      alert(photoId);
       this.dal_service
         .removePhotoFromCollection(this.collection.id, photoId)
         .then( (data) => {
-          alert("Photo Deleted: " + data);
+          alert("Photo Deleted.");
+          this.router.navigate(["/collections"]);
         })
         .catch( (e) => {
           alert("Failed to Delete Photo: " + e);

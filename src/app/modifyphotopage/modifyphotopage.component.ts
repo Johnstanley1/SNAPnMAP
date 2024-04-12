@@ -127,8 +127,14 @@ export class ModifyphotopageComponent implements OnInit{
 
       this.dal_service.updatePhoto(photo).then((data) => {
         alert("Photo added successfully");
-        // Navigate back to photolist:
-        this.router.navigate(["/photo"]);
+        if(photo.hidden){
+          //if photo is hidden, route back to hidden page:
+          this.router.navigate(["/hidden"]);
+        }
+        else{
+          // Otherwise, route back to main photo list page:
+          this.router.navigate(["/photo"]);
+        }
       }).catch((e) => {
         alert("Photo add failed " + e.message);
       });

@@ -5,6 +5,7 @@ import {ModelService, Photo, Tag} from "../../../services/model-service";
 import {DALService} from "../../../services/DAL-service";
 import {CameraComponent} from "../camera/camera.component";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 // Components
@@ -23,20 +24,22 @@ import {MaplocationComponent} from "../maplocation/maplocation.component";
   styleUrl: './camerapage.component.css'
 })
 export class CamerapageComponent {
-  constructor() {
 
-  }
+  // Initialize router within constructor:
+  constructor(private router: Router) { }
 
   tags: string[] = []
   Min_Length = 5
   Max_length = 20
 
+  // Inject builder and DAL
   builder = inject(FormBuilder)
-
   dal_service = inject(DALService)
 
+  // Initialize mapLocation (for getting lat/lon:
   mapLocation = new MaplocationComponent()
 
+  // Validation
   tagForm = this.builder.group({
     _tagName: ["",
       [Validators.required,
@@ -64,15 +67,19 @@ export class CamerapageComponent {
 
   })
 
+  // Get data:
   refName = this.photoForm.controls['_photoName']
   refDateCaptured = this.photoForm.controls['_dateCaptured']
   refDateAdded = this.photoForm.controls['_dateAdded']
   refTag = this.tagForm.controls['_tagName']
 
+  // On 'Add' Click:
   btnAdd_click() {
+    // Check Validation
     if (this.photoForm.valid) {
       console.log("Add photo form valid")
 
+      // Get data:
       const tag: string[] = this.tags
       const photoName = this.photoForm.value._photoName!;
       const dateCaptured = this.photoForm.value._dateCaptured!;
@@ -102,13 +109,26 @@ export class CamerapageComponent {
       const dataUrl = canvas.toDataURL('image/png');
       console.log("Data Url: " + dataUrl);
 
+      // Create new photo object, pass data:
       const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
         tag, favouritePhoto, hidePhoto, lon, lat)
 
-      this.dal_service.insertPhoto(photo).then((data) => {
-        alert("Photo added successfully: " + tag);
-        alert("Data URL: " + tag);
-      }).catch((e) => {
+      // Insert photo into DB:
+      this.dal_service
+        .insertPhoto(photo)
+        .then((data) => {
+        alert("Photo added successfully");
+        // Route depending on photo properties:
+          if(photo.hidden){
+            //if photo is hidden, route back to hidden page:
+            this.router.navigate(["/hidden"]);
+          }
+          else{
+            // Otherwise, route back to main photo list page:
+            this.router.navigate(["/photo"]);
+          }
+      })
+        .catch((e) => {
         alert("Photo add failed " + e.message);
       });
     } else {
