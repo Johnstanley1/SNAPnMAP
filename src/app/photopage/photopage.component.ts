@@ -20,6 +20,7 @@ export class PhotopageComponent implements OnInit{
   sortInt: number = 0;
   sortString: string = this.sortData[1]
   photos: any[] = [];
+  isFavourite: boolean = false;
 
   loadPhoto = inject(DALService)
 
@@ -47,19 +48,37 @@ export class PhotopageComponent implements OnInit{
 
   }
 
+  toggleFavourite(){
+    this.isFavourite = !this.isFavourite;
+    this.loadPhotos();
+  }
+
   loadPhotos() {
     console.log("LOAD PHOTOS CALLED");
+    if(!this.isFavourite){
+      this.loadPhoto.selectAllPhotos().then((data) => {
+        // Clear existing photos before pushing new ones (optional, depends on your requirements)
+        this.photos = [];
 
-    this.loadPhoto.selectAllPhotos().then((data) => {
-      // Clear existing photos before pushing new ones (optional, depends on your requirements)
-      this.photos = [];
-
-      for (let i = 0; i < data.length; i++) {
-        if (!data[i].hidden) {
-          this.photos.push(data[i]);
+        for (let i = 0; i < data.length; i++) {
+          if (!data[i].hidden) {
+            this.photos.push(data[i]);
+          }
         }
-      }
-    });
+      });
+    }else{
+      this.loadPhoto.selectAllPhotos().then((data) => {
+        // Clear existing photos before pushing new ones (optional, depends on your requirements)
+        this.photos = [];
+
+        for (let i = 0; i < data.length; i++) {
+          if (!data[i].hidden && data[i].favourite) {
+            this.photos.push(data[i]);
+          }
+        }
+      });
+    }
+
 
 
       // // Get card group:

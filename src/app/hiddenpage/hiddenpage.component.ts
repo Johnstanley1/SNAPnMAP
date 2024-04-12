@@ -22,7 +22,7 @@ export class HiddenpageComponent {
   sortInt: number = 0;
   sortString: string = this.sortData[1]
   photos: any[] = [];
-
+  passwordValid: boolean = false;
   loadPhoto = inject(DALService)
 
   constructor() {
@@ -39,11 +39,14 @@ export class HiddenpageComponent {
       const password: any = prompt("Please Enter your Password:");
 
       if(password === localStorage.getItem("Password")){
+        // Change flag:
+        this.passwordValid = true;
+        // Load Photos:
         this.loadPhotos();
       }
       else{
         const cardGroup: any = document.getElementById('deny');
-        cardGroup.innerHTML += `<p>No Password, No Access. 😈</p>`
+        cardGroup.innerHTML = `<p>No Password, No Access. 😈</p>`
       }
     }
   }
