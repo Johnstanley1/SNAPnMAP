@@ -91,7 +91,7 @@ export class AddphototocollectionpageComponent {
       console.log("Data Url: " + dataUrl );
 
       const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
-        [], false, false, 0)
+        [], false, false)
 
       this.dal_service.addPhotoToCollection(this.id, photo).then((data) => {
         alert("Photo added to Collection Successfully.");

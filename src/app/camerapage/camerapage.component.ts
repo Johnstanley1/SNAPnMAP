@@ -26,6 +26,7 @@ export class CamerapageComponent {
   constructor() {
 
   }
+
   tags: string[] = []
   Min_Length = 5
   Max_length = 20
@@ -56,8 +57,8 @@ export class CamerapageComponent {
       [Validators.required],
     ],
 
-    _favouritePhoto:[false],
-    _hidePhoto:[false]
+    _favouritePhoto: [false],
+    _hidePhoto: [false]
 
   })
 
@@ -70,11 +71,10 @@ export class CamerapageComponent {
     if (this.photoForm.valid) {
       console.log("Add photo form valid")
 
-      const tag: string[] =  this.tags
+      const tag: string[] = this.tags
       const photoName = this.photoForm.value._photoName!;
       const dateCaptured = this.photoForm.value._dateCaptured!;
       const dateAdded = this.photoForm.value._dateAdded!;
-      const photoTagId = parseInt(this.tags.toString());
       const favouritePhoto = this.photoForm.value._favouritePhoto!;
       const hidePhoto = this.photoForm.value._hidePhoto!;
 
@@ -94,10 +94,10 @@ export class CamerapageComponent {
 
       // Convert to dataURL:
       const dataUrl = canvas.toDataURL('image/png');
-      console.log("Data Url: " + dataUrl );
+      console.log("Data Url: " + dataUrl);
 
       const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
-        tag, favouritePhoto, hidePhoto, photoTagId)
+        tag, favouritePhoto, hidePhoto)
 
       this.dal_service.insertPhoto(photo).then((data) => {
         alert("Photo added successfully: " + tag);
@@ -105,7 +105,7 @@ export class CamerapageComponent {
       }).catch((e) => {
         alert("Photo add failed " + e.message);
       });
-    }else{
+    } else {
       alert("Add photo form is invalid")
     }
   }
@@ -117,16 +117,29 @@ export class CamerapageComponent {
   btnAddTag_click() {
     const tag = this.tagForm.value._tagName!
     const photoTag = new Tag(tag)
-    if (this.tagForm.invalid){
+    if (this.tagForm.invalid) {
       alert("Please add tags")
-    }else{
-      this.dal_service.insertTag(photoTag).then((data)=>{
+    } else {
+      this.dal_service.insertTag(photoTag).then((data) => {
+        const tagId = data.id
         this.tags.push(tag)
-        alert("Tag added successfully " + data);
-      }).catch((e)=>{
+        localStorage.setItem('tagId', JSON.stringify(tagId))
+      }).catch((e) => {
         console.log(e.message)
       })
     }
   }
 
+  deleteTag(i: number) {
+      this.tags.splice(i,1)
+
+      // const id = localStorage.getItem('tagId');
+      //
+      // this.dal_service.deleteTag(id).then((data)=>{
+      //   console.log(data)
+      // }).catch((e)=>{
+      //   console.log(e.message)
+      // })
+
+  }
 }

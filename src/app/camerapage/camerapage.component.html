@@ -73,8 +73,15 @@ Student ID: 8864315,
               }
             }
           </div>
-          <div class="col-4 mb-3">
-            <input type="text" class="form-control mb-2" *ngFor="let tag of tags" value="{{tags}}" readonly>
+          <div class=" mb-1" *ngFor="let tag of tags; let i = index" >
+            <div class="row">
+              <div class="col">
+                <input type="text" class="col-4 form-control mb-1"  value="{{tag}}" readonly>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-danger" (click)="deleteTag(i)">Delete</button>
+              </div>
+            </div>
           </div>
         </form>
 

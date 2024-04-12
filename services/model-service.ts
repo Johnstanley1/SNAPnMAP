@@ -17,13 +17,13 @@ export class Photo{
   tags: string[];
   favourite: boolean;
   hidden: boolean;
-  tagId: number;
+  //tagId: number;
   // lon: number;
   // lat: number;
 
 
   constructor(name: string, dataUrl: string, dateCaptured: string, dateAdded: string,tags: string[],
-              favourite: boolean, hidden: boolean, tagId: number) {
+              favourite: boolean, hidden: boolean) {
     this.name = name
     this.imageDataUrl = dataUrl
     this.dateCaptured = dateCaptured
@@ -31,7 +31,7 @@ export class Photo{
     this.tags = tags
     this.favourite = favourite
     this.hidden = hidden
-    this.tagId = tagId
+    //this.tagId = tagId
     // this.lon = lon
     // this.lat = lat
   }

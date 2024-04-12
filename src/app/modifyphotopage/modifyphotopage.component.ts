@@ -109,12 +109,12 @@ export class ModifyphotopageComponent implements OnInit{
       const dateCaptured = this.modifyPhotoForm.value._modifyDateCaptured!;
       const dateAdded = this.modifyPhotoForm.value._modifyDateAdded!;
       const photoTag = this.modifyPhotoForm.value._modifyPhotoTag!;
-      const photoTagId = parseInt(photoTag);
+      //const photoTagId = parseInt(photoTag);
       const favouritePhoto = this.modifyPhotoForm.value._modifyFavouritePhoto!;
       const hidePhoto = this.modifyPhotoForm.value._modifyHidePhoto!;
 
       const photo = new Photo(photoName, this.dataURL, dateCaptured, dateAdded,
-        [photoTag], favouritePhoto, hidePhoto, photoTagId);
+        [photoTag], favouritePhoto, hidePhoto);
 
       // Update the photo id to match the passed id:
       photo.id = this.id;

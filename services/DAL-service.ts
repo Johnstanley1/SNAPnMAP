@@ -567,4 +567,37 @@ export class DALService {
       }
     })
   }
+
+  // Called when 'delete' clicked
+  deleteTag(tag: Tag): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      const transaction = this.database.db.transaction(["tags"], "readwrite");
+
+      transaction.oncomplete = (event: any) => {
+        console.log("[DAL] Success: Transaction Delete Initialization");
+      };
+      transaction.onerror = (event: any) => {
+        console.log("[DAL] Fail: Transaction Delete Initialization: " + event);
+      };
+
+      const photoStore = transaction.objectStore("photos");
+      if (tag.id) {
+        const request = photoStore.delete(tag.id);
+
+        request.onsuccess = (event: any) => {
+          console.log("[DAL] Success: Delete Request Accepted.");
+          resolve(event);
+        };
+        request.onerror = (event: any) => {
+          console.log("[DAL] Fail: Delete Request Denied: " + event);
+          reject(event);
+        };
+      } else {
+        reject("Photo Does Not Posses An ID.")
+      }
+
+    });
+  }
+
 }
