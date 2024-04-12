@@ -5,15 +5,15 @@ Authors: Johnstanley Ajagu,
 Student ID: 8864315,
             8657254
 -->
-<div>
-  <a class="btn btn-outline-info" routerLink="/camera" role="button">Add Photo</a>
+<div id="btnContainer">
+  <a id="addBtn" class="btn btn-outline-info" routerLink="/camera" role="button">Add Photo</a>
 
-  <button style="margin-left: 15px;" type="button" class="btn btn-outline-info" role="checkbox" [class.btn-primary]="isFavourite" [class.btn-outline-info]="!isFavourite" (click)="toggleFavourite()">
-    <span>Favourite</span>
+  <button id="favBtn" type="button" class="btn btn-outline-info" role="checkbox" [class.btn-primary]="isFavourite" [class.btn-outline-info]="!isFavourite" (click)="toggleFavourite()">
+    <span>{{ favouriteString }}</span>
   </button>
 
   <a id="sortBtn" class="btn btn-outline-info" role="combobox" (click)="changeSortValue_click()">Sort: {{ sortString }}</a>
-  <a style="margin-left: 15px;" id="orderBtn" class="btn btn-outline-info" role="combobox" (click)="changeOrderValue_click()">Sort: {{ orderString }}</a>
+  <a id="orderBtn" class="btn btn-outline-info" role="combobox" (click)="changeOrderValue_click()">Sort: {{ orderString }}</a>
 
 </div>
 <div style="padding-bottom: 15px;"><!-- DIVIDER--></div>

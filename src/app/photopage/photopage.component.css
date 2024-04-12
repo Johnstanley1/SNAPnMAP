@@ -9,13 +9,33 @@
   gap: 10px;
 }
 
-#sortBtn{
-  padding-left: 15px;
-  margin-left: 15px;
-}
-
 .card-group img {
   max-width: 100%;
   height: auto;
 
+}
+
+#sortBtn{
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+#addBtn{
+
+}
+
+#favBtn{
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+#orderBtn{
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+#btnContainer{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
