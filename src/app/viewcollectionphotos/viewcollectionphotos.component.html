@@ -1,7 +1,7 @@
 <h4 class="text-center">{{ collectionName }}</h4>
 <div style="padding-bottom: 15px;"></div>
 <a [routerLink]="'/addphototocollection'"
-   [queryParams]="{id: collection.id}" role="button">Add Photo</a>
+   [queryParams]="{id: collection.id}" class="btn btn-outline-info" role="button">Add Photo</a>
 <div style="padding-bottom: 15px;"></div>
 <div class="card-group">
   <ng-container *ngIf="collectionPhotos.length === 0; else photos">

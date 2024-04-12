@@ -10,7 +10,8 @@ Student ID: 8864315,
     <div class="card-header text-center">
       <h2>Modify Collection</h2>
       <div style="padding-bottom: 5px"></div>
-      <a [routerLink]="'/viewCollectionPhotos'" [queryParams]="{id: collection.id}" role="button">View Photo List</a>
+        <a [routerLink]="'/viewCollectionPhotos'" [queryParams]="{id: collection.id}"
+           class="btn btn-outline-info" role="button">View Photo List</a>
     </div>
     <div class="card-body" *ngIf="collection">
       <div class="text-center m-3">
