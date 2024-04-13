@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, ElementRef, inject, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgForOf} from "@angular/common";
 import {ModelService, Photo, Tag} from "../../../services/model-service";
@@ -6,6 +6,7 @@ import {DALService} from "../../../services/DAL-service";
 import {CameraComponent} from "../camera/camera.component";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
 import { ActivatedRoute, Router } from "@angular/router";
+
 
 
 // Components
@@ -24,6 +25,13 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrl: './camerapage.component.css'
 })
 export class CamerapageComponent {
+  // get imageElement(): ElementRef {
+  //   return this._imageElement;
+  // }
+  //
+  // set imageElement(value: ElementRef) {
+  //   this._imageElement = value;
+  // }
 
   // Initialize router within constructor:
   constructor(private router: Router) { }
@@ -31,13 +39,27 @@ export class CamerapageComponent {
   tags: string[] = []
   Min_Length = 5
   Max_length = 20
+  image: any
 
   // Inject builder and DAL
   builder = inject(FormBuilder)
   dal_service = inject(DALService)
 
-  // Initialize mapLocation (for getting lat/lon:
+  // Initialize mapLocation (for getting lat/lon)
   mapLocation = new MaplocationComponent()
+
+  //@ViewChild('imageSource', {static: true}) _imageElement: ElementRef;
+  // get imageElement(): ElementRef {
+  //   return this._imageElement;
+  // }
+  // onCapturePhotoClick() {
+  //   // Check if the src attribute of the image element is empty
+  //   if (!this.imageElement.nativeElement.src || this.imageElement.nativeElement.src === '') {
+  //     // Alert the user if the image placeholder is empty
+  //     alert('No image is currently loaded.');
+  //   }
+  // }
+
 
   // Validation
   tagForm = this.builder.group({
@@ -79,6 +101,7 @@ export class CamerapageComponent {
     if (this.photoForm.valid) {
       console.log("Add photo form valid")
 
+
       // Get data:
       const tag: string[] = this.tags
       const photoName = this.photoForm.value._photoName!;
@@ -88,8 +111,6 @@ export class CamerapageComponent {
       const hidePhoto = this.photoForm.value._hidePhoto!;
       const lat = this.mapLocation.getLat();
       const lon = this.mapLocation.getLon();
-
-      console.log(lon, lat)
 
       // Before creating photo, we need to get the image passed, and convert it to DataURL
       const image: any = document.getElementById('imageSource');
@@ -107,7 +128,6 @@ export class CamerapageComponent {
 
       // Convert to dataURL:
       const dataUrl = canvas.toDataURL('image/png');
-      console.log("Data Url: " + dataUrl);
 
       // Create new photo object, pass data:
       const photo = new Photo(photoName, dataUrl, dateCaptured, dateAdded,
@@ -147,9 +167,7 @@ export class CamerapageComponent {
       alert("Please add tags")
     } else {
       this.dal_service.insertTag(photoTag).then((data) => {
-        const tagId = data.id
         this.tags.push(tag)
-        localStorage.setItem('tagId', JSON.stringify(tagId))
       }).catch((e) => {
         console.log(e.message)
       })
@@ -158,6 +176,5 @@ export class CamerapageComponent {
 
   deleteTag(i: number) {
       this.tags.splice(i,1)
-
   }
 }

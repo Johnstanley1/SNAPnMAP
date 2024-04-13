@@ -75,7 +75,6 @@ export class AddcollectionspageComponent {
 
       // Convert to dataURL:
       const dataUrl = canvas.toDataURL('image/png');
-      console.log("Data Url: " + dataUrl );
 
       // Assign values to new collection object:
       const collection: Collection = new Collection(collectionName, dataUrl, [], collectionDate, collectionDescription);

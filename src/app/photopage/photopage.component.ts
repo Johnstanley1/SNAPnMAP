@@ -179,38 +179,5 @@ export class PhotopageComponent implements OnInit{
         }
       });
     }
-
-
-
-      // // Get card group:
-      // let cardGroup = document.getElementById('card-group')!;
-      //
-      // let htmlCode = ""
-      //
-      // if (data.length === 0) {
-      //   htmlCode += `<p>No Photos Inside Storage 😭</p>`
-      // } else {
-      //   for (let i = 0; i < data.length; i++) {
-      //     const card = data [i]
-      //
-      //     // CHECK IF THE PHOTO HAS HIDDEN ATTRIBUTE:
-      //     if(!card.hidden){
-      //       // Create new image and assign it the saved dataUrl:
-      //       const img = new Image();
-      //       //img.src = card.imageDataUrl;
-      //
-      //       htmlCode += `<div class="card">
-      //                  <a href="/modifyPhoto" data-row-id="${card.id}" role="button">
-      //                    <img src="${card.imageDataUrl}" class="card-img-top" alt="Photo">
-      //                    <p>${card.name}</p>
-      //                  </a>
-      //                </div>`;
-      //     }
-      //   }
-      // }
-      //
-      // cardGroup.innerHTML = htmlCode;
-
-
   }
 }

@@ -15,6 +15,10 @@ export class CameraComponent {
   imgsrc: any
   cameraService = inject(CameraService)
 
+  constructor() {
+
+  }
+
   onCapturePhotoClick() {
     this.cameraService.capturePhoto().then(data=>{
       this.imgsrc = data
@@ -29,5 +33,13 @@ export class CameraComponent {
     }).catch(e=>{
       alert(e.toString())
     });
+  }
+
+  getCapture(){
+    return this.onCapturePhotoClick()
+  }
+
+  getLoad(){
+    return this.onLoadFromLibraryClick()
   }
 }
