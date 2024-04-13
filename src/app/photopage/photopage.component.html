@@ -25,7 +25,9 @@ Student ID: 8864315,
       <div *ngFor="let card of photos" class="card">
         <a [routerLink]="'/modifyPhoto'" [queryParams]="{id: card.id}" class="text-decoration-none" role="button">
           <img [src]="card.imageDataUrl" class="card-img-top" alt="photo">
-          <p style="padding-top: 10px; margin-top: 10px;" class="card-text text-info-emphasis btn btn-outline-info m-1">{{card.name}}</p>
+          <p style="padding-top: 10px; margin-top: 10px;" class="card-text text-info-emphasis m-1">{{card.name}}</p>
+          <hr>
+          <p style="padding-top: 10px; margin-top: 10px;" class="card-text text-info-emphasis m-1">{{card.tags}}</p>
         </a>
     </div>
   </ng-template>

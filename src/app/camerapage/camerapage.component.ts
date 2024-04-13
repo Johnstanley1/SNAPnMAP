@@ -7,8 +7,6 @@ import {CameraComponent} from "../camera/camera.component";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
 import { ActivatedRoute, Router } from "@angular/router";
 
-
-
 // Components
 @Component({
   selector: 'app-camerapage',
@@ -25,13 +23,6 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrl: './camerapage.component.css'
 })
 export class CamerapageComponent {
-  // get imageElement(): ElementRef {
-  //   return this._imageElement;
-  // }
-  //
-  // set imageElement(value: ElementRef) {
-  //   this._imageElement = value;
-  // }
 
   // Initialize router within constructor:
   constructor(private router: Router) { }
@@ -47,19 +38,6 @@ export class CamerapageComponent {
 
   // Initialize mapLocation (for getting lat/lon)
   mapLocation = new MaplocationComponent()
-
-  //@ViewChild('imageSource', {static: true}) _imageElement: ElementRef;
-  // get imageElement(): ElementRef {
-  //   return this._imageElement;
-  // }
-  // onCapturePhotoClick() {
-  //   // Check if the src attribute of the image element is empty
-  //   if (!this.imageElement.nativeElement.src || this.imageElement.nativeElement.src === '') {
-  //     // Alert the user if the image placeholder is empty
-  //     alert('No image is currently loaded.');
-  //   }
-  // }
-
 
   // Validation
   tagForm = this.builder.group({
