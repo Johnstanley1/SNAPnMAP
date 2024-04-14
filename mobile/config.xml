@@ -7,10 +7,10 @@
       Will Smith
     </description>
     <author email="jajagu4351@conestogac.on.ca" href="https://cordova.apache.org">
-        Apache Cordova Team
+        Snap and Map Team
     </author>
-    <icon src="/www/assets/img/Gallery.png"/>
-    <splash src="/www/assets/img/Gallery.png"/>
+    <icon src="/www/assets/img/GalleryLoad.png" />
+    <splash src="/www/assets/img/GalleryLoad.png" />
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

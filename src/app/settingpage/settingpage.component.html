@@ -1,18 +1,40 @@
 <div class="">
   <div class="card">
     <div class="card-header text-center">
-      <h1>Settings</h1>
+      <h4>App Settings</h4>
+    </div>
+    <div class="card-body">
+      <div class="d-grid gap-2 mx-auto">
+        <button class="btn btn-outline-info" type="button" (click)="setPassword_click()">{{ passwordSet }}</button>
+      </div>
+    </div>
+  </div>
+  <div style="padding-bottom: 10px; margin-bottom: 10px"></div>
+  <div class="card">
+    <div class="card-header text-center">
+      <h4>Database Settings</h4>
     </div>
     <div class="card-body">
       <div class="d-grid gap-2 mx-auto">
         <button class="btn btn-outline-info" type="button" (click)="clearPhotos_click()">Clear Photos</button>
         <button class="btn btn-outline-info" type="button" (click)="clearCollections_click()">Clear Collection</button>
         <button class="btn btn-outline-info" type="button" (click)="clearDatabase_click()">Clear Database</button>
-        <button class="btn btn-outline-info" type="button" (click)="setPassword_click()">{{ passwordSet }}</button>
         <button type="submit" class="btn btn-outline-info container-fluid" (click)="btnDeleteTag_click()">Clear Tag</button>
+      </div>
+    </div>
+  </div>
+  <div style="padding-bottom: 10px; margin-bottom: 10px"></div>
+  <div class="card">
+    <div class="card-header text-center">
+      <h4>Credits</h4>
+    </div>
+    <div class="card-body">
+      <div class="d-grid gap-2 mx-auto">
         <a class="btn btn-outline-info" routerLink="/authors" role="button">Authors</a>
       </div>
     </div>
   </div>
+  <div style="padding-bottom: 10px; margin-bottom: 10px"></div>
+  <p>&copy; 2024 Will Smith and Johnstanley Ajagu </p>
 </div>
 
