@@ -5,17 +5,22 @@ Authors: Johnstanley Ajagu,
 Student ID: 8864315,
             8657254
 -->
-<div id="btnContainer">
-  <a id="addBtn" class="btn btn-outline-info" routerLink="/camera" role="button">Add Photo</a>
-
-  <button id="favBtn" type="button" class="btn btn-outline-info" role="checkbox" [class.btn-primary]="isFavourite" [class.btn-outline-info]="!isFavourite" (click)="toggleFavourite()">
-    <span>{{ favouriteString }}</span>
-  </button>
-
-  <a id="sortBtn" class="btn btn-outline-info" role="combobox" (click)="changeSortValue_click()">Sort: {{ sortString }}</a>
-  <a id="orderBtn" class="btn btn-outline-info" role="combobox" (click)="changeOrderValue_click()">Sort: {{ orderString }}</a>
-
-</div>
+<ul class="nav ">
+  <li class="nav-item">
+    <a id="addBtn" class="btn btn-outline-info active" routerLink="/camera" role="button">Add Photo</a>
+  </li>
+  <li class="nav-item">
+    <button id="favBtn" type="button" class="btn btn-outline-info" role="checkbox" [class.btn-primary]="isFavourite" [class.btn-outline-info]="!isFavourite" (click)="toggleFavourite()">
+      <span>{{ favouriteString }}</span>
+    </button>
+  </li>
+  <li class="nav-item">
+    <a id="sortBtn" class="btn btn-outline-info" role="combobox" (click)="changeSortValue_click()">Sort: {{ sortString }}</a>
+  </li>
+  <li class="nav-item">
+    <a id="orderBtn" class="btn btn-outline-info" role="combobox" (click)="changeOrderValue_click()">Sort: {{ orderString }}</a>
+  </li>
+</ul>
 <div style="padding-bottom: 15px;"><!-- DIVIDER--></div>
 <div class="card-group">
   <ng-container *ngIf="photos.length === 0; else photoList" class="col-6">
