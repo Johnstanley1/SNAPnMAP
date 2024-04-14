@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {DALService} from "../../../services/DAL-service";
 import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
+import {InternetconnectionService} from "../../../services/internetconnection.service";
 
 
 @Component({
@@ -13,7 +14,8 @@ import {NgForOf, NgIf} from "@angular/common";
     NgIf
   ],
   templateUrl: './hiddenpage.component.html',
-  styleUrl: './hiddenpage.component.css'
+  styleUrl: './hiddenpage.component.css',
+  providers: [InternetconnectionService]
 })
 
 
@@ -24,9 +26,11 @@ export class HiddenpageComponent {
   photos: any[] = [];
   passwordValid: boolean = false;
   loadPhoto = inject(DALService)
-
-  constructor() {
-
+  isConnected: boolean = true
+  constructor(private internetConnectionService: InternetconnectionService) {
+    this.internetConnectionService.isConnected().subscribe(connected=>{
+      this.isConnected = connected
+    })
   }
 
   ngOnInit(): void {

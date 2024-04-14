@@ -104,21 +104,19 @@ export class CamerapageComponent {
       const context = canvas.getContext('2d');
 
       // Assign dimensions:
-      let canvasWidth = image.width;
-      let canvasHeight = image.height;
+      canvas.width = image.width;
+      canvas.height = image.height;
 
       if (image.width > image.height) {
         // Swap width and height for landscape images
-        canvasWidth = image.height;
-        canvasHeight = image.width;
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
-        context.translate(canvasWidth / 2, canvasHeight / 2); // Center the image
+        canvas.width = image.width;
+        canvas.height = image.height;
+        context.translate(canvas.width / 2, canvas.height / 2); // Center the image
         context.rotate(Math.PI / 2); // Rotate clockwise
-        context.translate(-canvasHeight / 2, -canvasWidth / 2); // Pin to top left
+        context.translate(-canvas.height / 2, -canvas.width / 2); // Pin to top left
       } else {
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
+        canvas.width = canvas.width;
+        canvas.height = canvas.height;
       }
 
 

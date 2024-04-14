@@ -25,7 +25,6 @@ export class MaplocationComponent {
   }
   getLocationOnclick() {
     const subscription = this.geoService.getCurrentLocation().then(data => {
-      console.log(data);
       this.position = data;
       // @ts-ignore
       this.lat = data.lat;
@@ -55,7 +54,8 @@ export class MaplocationComponent {
     var options = {
       zoom: 15,
       center: {
-        lat: this.lat, lng: this.lon
+        lat: this.lat,
+        lng: this.lon,
       }
     };
 
@@ -68,7 +68,8 @@ export class MaplocationComponent {
 
     var icon = new H.map.Icon('assets/icons/mark.png');
     var marker = new H.map.Marker({
-      lat: this.lat, lng: this.lon
+      lat: this.lat,
+      lng: this.lon,
     }, {icon: icon});
 
     // Add the marker to the map and center the map at the location of the marker:
@@ -82,5 +83,6 @@ export class MaplocationComponent {
   getLon(): any {
     return this.lon;
   }
+
 
 }

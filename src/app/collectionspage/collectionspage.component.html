@@ -5,6 +5,12 @@ Authors: Johnstanley Ajagu,
 Student ID: 8864315,
             88*****
 -->
+<div class="mb-2">
+  <label *ngIf="isConnected; else notConnectedMessage">Connected 📶</label>
+  <ng-template #notConnectedMessage>
+    <label>Disconnected 📈</label>
+  </ng-template>
+</div>
 <div>
   <a class="btn btn-outline-info" routerLink="/addCollections" role="button">Create Collections</a>
 </div>
