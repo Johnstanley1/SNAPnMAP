@@ -1,3 +1,11 @@
+/*
+Programming Mobile Apps
+Authors: Johnstanley Ajagu,
+         Will Smith
+Student ID: 8864315,
+            8657254
+*/
+
 import {Component, inject, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgIf} from "@angular/common";
