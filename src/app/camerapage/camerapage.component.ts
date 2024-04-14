@@ -108,13 +108,11 @@ export class CamerapageComponent {
       canvas.width = image.width;
       canvas.height = image.height;
 
-      if (image.width > image.height) {
-        context.translate(canvas.width / 2, canvas.height / 2); // Center the image
-        context.rotate(Math.PI / 2); // Rotate clockwise
-        context.translate(-canvas.height / 2, -canvas.width / 2); // Pin to top left
-      }
-
-
+      context.translate(canvas.width / 2, canvas.height / 2); // Center the image
+      context.translate(canvas.width, 0);
+      context.rotate(Math.PI / 4); // Rotate clockwise
+      context.translate(-canvas.height / 2, -canvas.width / 2); // Pin to top left
+      
       // Draw the image
       context.drawImage(image, 0, 0, image.width, image.height);
 
