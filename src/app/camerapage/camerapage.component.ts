@@ -1,3 +1,8 @@
+// Programming Mobile Apps
+// Authors: Johnstanley Ajagu,
+//          Will Smith
+// Student ID: 8864315,
+//             8657254
 import {Component, ElementRef, inject, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgForOf} from "@angular/common";
@@ -6,6 +11,7 @@ import {DALService} from "../../../services/DAL-service";
 import {CameraComponent} from "../camera/camera.component";
 import {MaplocationComponent} from "../maplocation/maplocation.component";
 import { ActivatedRoute, Router } from "@angular/router";
+
 
 // Components
 @Component({
@@ -98,15 +104,23 @@ export class CamerapageComponent {
       const context = canvas.getContext('2d');
 
       // Assign dimensions:
-      canvas.width = image.width;
-      canvas.height = image.height;
+      let canvasWidth = image.width;
+      let canvasHeight = image.height;
 
-      if(image.width > image.height){
-        canvas.width = image.width;
-        canvas.height = image.height;
-        context.rotate(Math.PI/2)
-        context.translate(0, -image.width)
+      if (image.width > image.height) {
+        // Swap width and height for landscape images
+        canvasWidth = image.height;
+        canvasHeight = image.width;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        context.translate(canvasWidth / 2, canvasHeight / 2); // Center the image
+        context.rotate(Math.PI / 2); // Rotate clockwise
+        context.translate(-canvasHeight / 2, -canvasWidth / 2); // Pin to top left
+      } else {
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
       }
+
 
       // Draw the image
       context.drawImage(image, 0, 0, image.width, image.height);

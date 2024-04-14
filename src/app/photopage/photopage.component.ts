@@ -1,8 +1,13 @@
+// Programming Mobile Apps
+// Authors: Johnstanley Ajagu,
+//          Will Smith
+// Student ID: 8864315,
+//             8657254
 import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink, Router} from "@angular/router";
 import {DALService} from "../../../services/DAL-service";
-import {NgForOf, NgIf} from "@angular/common";
-import {MaplocationComponent} from "../maplocation/maplocation.component";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {InternetconnectionService} from "../../../services/internetconnection.service";
 
 @Component({
   selector: 'app-photopage',
@@ -10,10 +15,12 @@ import {MaplocationComponent} from "../maplocation/maplocation.component";
   imports: [
     RouterLink,
     NgForOf,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './photopage.component.html',
-  styleUrl: './photopage.component.css'
+  styleUrl: './photopage.component.css',
+  providers: [InternetconnectionService],
 })
 export class PhotopageComponent implements OnInit{
 
@@ -32,11 +39,17 @@ export class PhotopageComponent implements OnInit{
 
   loadPhoto = inject(DALService)
 
+  isConnected: boolean = true
+
   // Pass the router through the constructor for usage later
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+               private internetConnectionService: InternetconnectionService) { }
 
   ngOnInit(): void {
     this.loadPhotos()
+    this.internetConnectionService.isConnected().subscribe(connected=>{
+      this.isConnected = connected
+    })
   }
 
   changeSortValue_click() {
