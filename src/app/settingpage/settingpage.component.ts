@@ -49,7 +49,7 @@ export class SettingpageComponent {
   clearCollections_click() {
     if (confirm("Are you Sure you want to Delete all Collections? 💔")) {
       this.dal_service
-        .deleteAllPhotos()
+        .deleteAllCollections()
         .then(() => {
           alert("All Collections Deleted Successfully.😢")
         })
@@ -63,14 +63,28 @@ export class SettingpageComponent {
 
   clearDatabase_click() {
     if (confirm("Are you Sure you want to Clear the Database? 💔")) {
+      // Delete all tags:
       this.dal_service
-        .deleteAllPhotos()
-        .then(() => {
-          alert("Database Cleared Successfully.😢")
-        })
+        .deleteAllTags()
+        .then(() => {})
         .catch((e) => {
           alert("Failed to Clear Database: " + e.message)
         });
+      // Delete all photos:
+      this.dal_service
+        .deleteAllPhotos()
+        .then(() => {})
+        .catch((e) => {
+          alert("Failed to Clear Database: " + e.message)
+        });
+      // Delete all Collections
+      this.dal_service
+        .deleteAllCollections()
+        .then(() => {})
+        .catch((e) => {
+          alert("Failed to Clear Database: " + e.message)
+        });
+      alert("Database Cleared 😞")
     } else {
       alert("Didnt think so 😉.");
     }
