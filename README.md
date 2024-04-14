@@ -12,8 +12,7 @@ This Angular-based mobile app allows users to capture photos with their device's
 - Show location-based mapping for each image
 - Search functionality to find images by tags or location
 - Maintain a private list of images, accessible via passcode authentication
-- "Share" button to share photos over messenger, email, etc.
-
+- Create collections, and add photos to the collection
 
 ## Menu/Navigation (Minumum: 4, Full Marks 7+)
 *Because it's a mobile app, we should LOCK the navbar to the footer, and make it present on every page (similar to social media navbars at the bottom)* \
@@ -23,17 +22,21 @@ This Angular-based mobile app allows users to capture photos with their device's
 - Camera 
 - Hidden Photos
 - Settings
+- Plus many more Add/Modify Pages, for all Objects
 
 # Pages
 - Photos
     - List of all photos
     - Utilize Bootstrap5 'Card' to display photos in Display-Block
     - Each photo has onClick() function to view details
-    - '+' Icon top right to add new photo from library/camera
+    - 'Add Photo' button top left to add new photo from library/camera
     - does NOT display photos with 'Hidden: True' value
+    - Can filter to only show photos with 'favourite' tag
+    - Can order photos: Alphabetically, By Date Added, or by Date Taken (Ascending and Descending)
 - Add Photo
     - Form with validation
     - Add name, desc, tags, etc.
+    - View location of where the photo was taken
 - Collections
     - List of all collections
     - Use bootstrap5 'card' to display collections in display-block
