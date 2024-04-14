@@ -1,3 +1,11 @@
+/*
+Programming Mobile Apps
+Authors: Johnstanley Ajagu,
+         Will Smith
+Student ID: 8864315,
+            8657254
+*/
+
 import { Component, inject, OnInit } from '@angular/core';
 import {RouterLink, Router} from "@angular/router";
 import {DALService} from "../../../services/DAL-service";
