@@ -12,14 +12,13 @@
   <author email="wsmith7254@conestogac.on.ca" href="https://cordova.apache.org">
     Snap and Map Team
   </author>
-  <platform name="android">
-    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="Gallery1.png"/>
-    <preference name="AndroidWindowSplashScreenBackground" value="#000000" />
-    <preference name="SplashScreenDelay" value="1000"/>
-  </platform>
-  <icon src="/www/assets/img/Gallery1.png" />
-  <splash src="/www/assets/icon/Gallery1.png" />
   <content src="index.html" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
+  <platform name="android">
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="splash.png"/>
+    <preference name="AndroidWindowSplashScreenBackground" value="#ffffff" />
+    <preference name="SplashScreenDelay" value="1000"/>
+  </platform>
+  <icon src="icon.png" />
 </widget>
