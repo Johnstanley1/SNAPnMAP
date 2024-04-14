@@ -101,6 +101,13 @@ export class CamerapageComponent {
       canvas.width = image.width;
       canvas.height = image.height;
 
+      if(image.width > image.height){
+        canvas.width = image.height;
+        canvas.height = image.width;
+        context.rotate(Math.PI/2)
+        context.translate(0, -image.width)
+      }
+
       // Draw the image
       context.drawImage(image, 0, 0, image.width, image.height);
 
