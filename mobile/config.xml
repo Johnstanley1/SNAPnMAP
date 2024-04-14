@@ -1,10 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HelloCordova</name>
-    <description>Sample Apache Cordova App</description>
-    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
+    <name>SNAPnMAP</name>
+    <description>
+      Image catalogue app developed for Prog2435 Final exam by:
+      Johnstanley Ajagu
+      Will Smith
+    </description>
+    <author email="jajagu4351@conestogac.on.ca" href="https://cordova.apache.org">
         Apache Cordova Team
     </author>
+    <icon src="/www/assets/img/Gallery.png"/>
+    <splash src="/www/assets/img/Gallery.png"/>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

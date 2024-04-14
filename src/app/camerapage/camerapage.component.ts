@@ -108,15 +108,9 @@ export class CamerapageComponent {
       canvas.height = image.height;
 
       if (image.width > image.height) {
-        // Swap width and height for landscape images
-        canvas.width = image.width;
-        canvas.height = image.height;
         context.translate(canvas.width / 2, canvas.height / 2); // Center the image
         context.rotate(Math.PI / 2); // Rotate clockwise
         context.translate(-canvas.height / 2, -canvas.width / 2); // Pin to top left
-      } else {
-        canvas.width = canvas.width;
-        canvas.height = canvas.height;
       }
 
 
