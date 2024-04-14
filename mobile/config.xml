@@ -1,17 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SNAPnMAP</name>
-    <description>
-      Image catalogue app developed for Prog2435 Final exam by:
-      Johnstanley Ajagu
-      Will Smith
-    </description>
-    <author email="jajagu4351@conestogac.on.ca" href="https://cordova.apache.org">
-        Snap and Map Team
-    </author>
-    <icon src="/www/assets/img/GalleryLoad.png" />
-    <splash src="/www/assets/img/GalleryLoad.png" />
-    <content src="index.html" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
+<widget id="com.SNAPandMap.myapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>SNAPnMAP</name>
+  <description>
+    Image catalogue app developed for Prog2435 Final exam by:
+    Johnstanley Ajagu
+    Will Smith
+  </description>
+  <author email="jajagu4351@conestogac.on.ca" href="https://cordova.apache.org">
+    Snap and Map Team
+  </author>
+  <author email="wsmith7254@conestogac.on.ca" href="https://cordova.apache.org">
+    Snap and Map Team
+  </author>
+  <platform name="android">
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="Gallery1.png"/>
+    <preference name="AndroidWindowSplashScreenBackground" value="#000000" />
+    <preference name="SplashScreenDelay" value="1000"/>
+  </platform>
+  <icon src="/www/assets/img/Gallery1.png" />
+  <splash src="/www/assets/icon/Gallery1.png" />
+  <content src="index.html" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
 </widget>
