@@ -12,7 +12,8 @@ This Angular-based mobile app allows users to capture photos with their device's
 - Show location-based mapping for each image
 - Search functionality to find images by tags or location
 - Maintain a private list of images, accessible via passcode authentication
-- Create collections, and add photos to the collection
+- Create collections and add photos to the collection
+- Determine when a user is online or offline
 
 ## Menu/Navigation (Minumum: 4, Full Marks 7+)
 *Because it's a mobile app, we should LOCK the navbar to the footer, and make it present on every page (similar to social media navbars at the bottom)* \
@@ -29,25 +30,25 @@ This Angular-based mobile app allows users to capture photos with their device's
     - List of all photos
     - Utilize Bootstrap5 'Card' to display photos in Display-Block
     - Each photo has onClick() function to view details
-    - 'Add Photo' button top left to add new photo from library/camera
+    - 'Add Photo' button at the top left to add a new photo from the library/camera
     - does NOT display photos with 'Hidden: True' value
-    - Can filter to only show photos with 'favourite' tag
-    - Can order photos: Alphabetically, By Date Added, or by Date Taken (Ascending and Descending)
+    - Can filter only to show photos with a 'favourite' tag
+    - Can order photos Alphabetically, By Date Added, or by Date Taken (Ascending and Descending)
 - Add Photo
     - Form with validation
     - Add name, desc, tags, etc.
-    - View location of where the photo was taken
+    - View the location where the photo was taken
 - Collections
     - List of all collections
     - Use bootstrap5 'card' to display collections in display-block
-    - Collection icon used in 'card' is "Thumbnail" image datatype
+    - The collection icon used in 'card' is "Thumbnail" image datatype
     - Each collection has onClick() function to view collection photos
     - '+' icon top right to navigate to add new collection page
 - Add Collection 
     - Form with validation
     - Add name, thumbnail, desc, etc.
 - Camera
-    - Takes a photo, then uses that data in 'add new photo' page
+    - Takes a photo, then uses that data in the 'add new photo' page
 - Hidden Photos
     - Password locked
     - shows all photos with 'Hidden: True' value
@@ -64,7 +65,7 @@ This Angular-based mobile app allows users to capture photos with their device's
 
 # Advanced Features (Max Marks: Both Geo and Camera)
 - Utilize Geolocation to Show photos on a map (HARD)
-- Camera used to take and add new photos to library
+- Camera used to take and add new photos to the library
 
 # Database Schema (Minumum 2 Stores, Full Marks 3+ Significant):
 Photos: { \
@@ -92,6 +93,7 @@ Tags{ \
 
 ## Technologies Used
 - Angular
+- Typescript
 - Node.js
 - Html
 - Bootstrap
