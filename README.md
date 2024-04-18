@@ -1,7 +1,7 @@
 # Image Catalogue Mobile App
 
 ## Overview
-This Angular-based mobile app allows users to capture photos with their device's camera, store them in the app's database, add geolocation information to the images, and view them in a catalogue format with location-based mapping.
+This Angular-based mobile app allows users to capture photos with their device's camera, store them in the app's database, add geolocation information to the images, view them in a catalogue format with location-based mapping, and internet connectivity confirmation.
 
 ## Features
 - Capture photos using the device's camera
